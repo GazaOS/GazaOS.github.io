@@ -7,10 +7,10 @@
       "device": "stone",
       "filename": "GazaOSAndroid-16.2-20261124-stone-v16.2.zip",
       "download": "https://github.com/GazaOS/releases/releases/download/261124/GazaOSAndroid-16.2-20261124-stone-v16.2.zip",
-      "timestamp": 1795510385,
-      "md5": "27ba9c16ac3e1da3ee83451e1c5d6a8f",
-      "sha256": "f0fa82859889d553ef3bfa6b131a830917e97f52efb01744d362938ab2229ea6",
-      "size": 1664772380,
+      "timestamp": 1795535660,
+      "md5": "a5f3ada07924f3e45433da4f1d17cbcb",
+      "sha256": "2bfd023be563b3a6f909d95bcbf508968d9d3127377d833f507cf448ec17de3d",
+      "size": 1662962675,
       "version": "16.2",
       "buildtype": "Community"
     }
