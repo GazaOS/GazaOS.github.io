@@ -27,6 +27,17 @@
             pointer-events: none;
         }
 
+        .top-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            z-index: 10;
+            background: linear-gradient(to right, transparent 0%, #10b981 30%, #ffffff 50%, #ef4444 70%, transparent 100%);
+            pointer-events: none;
+        }
+
         .glare-bg {
             position: fixed;
             inset: 0;
@@ -122,7 +133,6 @@
         }
         .nav-handle:hover { background: rgba(255, 255, 255, 0.6); }
 
-        .nav-left { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
         .nav-links { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
         .nav-links a {
             color: var(--text-dim);
@@ -245,10 +255,10 @@
         .brand-chip:hover:not(.active) { border-color: white; color: white; }
 
         header { text-align: center; padding: 130px 20px 30px; position: relative; z-index: 2; }
-        h1 { 
-            font-size: 3.2rem; 
-            font-weight: 500; 
-            margin-bottom: 8px; 
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 500;
+            margin-bottom: 8px;
             letter-spacing: -1.2px;
             background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
             -webkit-background-clip: text;
@@ -286,9 +296,9 @@
             backdrop-filter: blur(14px);
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
-        .card:hover { 
-            transform: translateY(-8px); 
-            border-color: rgba(255,255,255,0.25); 
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.25);
             background: rgba(12, 12, 12, 0.85);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
@@ -296,11 +306,11 @@
 
         .card-top { display: flex; flex-direction: column; align-items: center; width: 100%; }
 
-        .card img { 
-            height: 190px; 
-            width: auto; 
-            max-width: 100%; 
-            object-fit: contain; 
+        .card img {
+            height: 190px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
             margin: 18px 0;
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
@@ -338,27 +348,26 @@
             border: none;
             transition: 0.3s ease;
         }
-        .btn-download { 
-            background: white; 
-            color: black; 
+        .btn-download {
+            background: white;
+            color: black;
         }
-        .btn-download:hover { 
-            transform: scale(1.02); 
-            background: #f0f0f0; 
+        .btn-download:hover {
+            transform: scale(1.02);
+            background: #f0f0f0;
             box-shadow: 0 4px 20px rgba(255,255,255,0.2);
         }
 
-        .btn-spec { 
-            background: transparent; 
-            color: white; 
-            border: 1px solid var(--border); 
+        .btn-spec {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--border);
         }
-        .btn-spec:hover { 
-            border-color: white; 
+        .btn-spec:hover {
+            border-color: white;
             background: rgba(255,255,255,0.06);
         }
 
-        /* Modals */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -389,7 +398,7 @@
         }
         .modal-content h2 { font-size: 1.6rem; margin-bottom: 12px; font-weight: 500; }
         .modal-body { color: var(--text-dim); font-size: 0.88rem; text-align: left; margin-bottom: 16px; line-height: 1.65; max-height: 60vh; overflow-y: auto; }
-        
+
         .download-links-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
         .download-btn-pill {
             display: flex;
@@ -420,7 +429,7 @@
         }
         .btn-close:hover { transform: scale(1.05); }
 
-        footer { text-align: center; padding: 60px; color: #444; border-top: 1px solid var(--border); font-size: 0.82rem; position: relative; z-index: 2; }
+        footer { text-align: center; padding: 60px; color: #555; border-top: 1px solid var(--border); font-size: 0.82rem; position: relative; z-index: 2; }
 
         @media (max-width: 900px) {
             nav { grid-template-columns: auto 1fr auto; }
@@ -437,10 +446,11 @@
 
     <canvas id="particleCanvas"></canvas>
     <div class="glare-bg"></div>
+    <div class="top-line"></div>
 
     <nav>
         <div class="avatar-menu">
-            <button class="avatar-btn" id="avatarBtn" aria-label="Organization links">
+            <button class="avatar-btn" id="avatarBtn" type="button" aria-label="Organization links">
                 <img src="profile/avatar.png" alt="GazaOS" width="200" height="200">
             </button>
             <div class="avatar-dropdown" id="avatarDropdown">
@@ -450,10 +460,10 @@
         </div>
         <input type="text" id="searchInput" class="nav-search" placeholder="Search devices or codenames...">
         <div class="brand-scroll" id="brandScroll">
-            <button class="brand-chip active" data-filter="all">All</button>
-            <button class="brand-chip" data-filter="Xiaomi">Xiaomi</button>
-            <button class="brand-chip" data-filter="Redmi">Redmi</button>
-            <button class="brand-chip" data-filter="Poco">POCO</button>
+            <button class="brand-chip active" type="button" data-filter="all">All</button>
+            <button class="brand-chip" type="button" data-filter="Xiaomi">Xiaomi</button>
+            <button class="brand-chip" type="button" data-filter="Redmi">Redmi</button>
+            <button class="brand-chip" type="button" data-filter="Poco">POCO</button>
         </div>
         <div class="nav-links">
             <a href="./index.html">About</a>
@@ -466,7 +476,7 @@
 
     <header>
         <h1>Supported <span>Devices</span></h1>
-        <p>Official GazaOS 16.2 (Baklava) builds for community devices.</p>
+        <p>Official GazaOS 16.2 (Baklava) builds with HyperOS, ColorOS &amp; Hybrid UI presets.</p>
     </header>
 
     <div class="grid" id="deviceGrid">
@@ -480,7 +490,8 @@
                 <img src="devices/stone/stone.png" alt="Redmi Note 12 5G" onerror="this.src='profile/avatar.png'">
             </div>
             <div class="card-actions">
-                <button class="btn-download"
+                <button class="btn-download" type="button"
+                    data-ota="devices/stone/stone.json"
                     data-name="Redmi Note 12 5G"
                     data-codename="stone (sunstone)"
                     data-maintainer="@Parvez52 (MASUD PARVEZ)"
@@ -493,13 +504,14 @@
                     data-release="https://github.com/GazaOS/releases/releases/download/261124/GazaOSAndroid-16.2-20261124-stone-v16.2.zip"
                     data-pixeldrain="https://pixeldrain.com/u/stone-16.2"
                     data-gofile="https://gofile.io/d/stone-16.2">Download</button>
-                <button class="btn-spec"
+                <button class="btn-spec" type="button"
                     data-name="Redmi Note 12 5G (stone)"
                     data-specs="Chipset: Qualcomm Snapdragon® 4 Gen 1 (SM4375)
 RAM: 4 / 6 / 8 GB LPDDR4X
 Storage: 128 / 256 GB UFS 2.2
 Display: 6.67&quot; AMOLED, 120Hz, FHD+ (2400x1080)
 Battery: 5000 mAh, 33W Fast Charging
+UI: GazaOS Hybrid, HyperOS &amp; ColorOS Presets + Mist QS
 Audio: Dolby Atmos + ViPER4Android FX
 Firewall: Datura Privacy Shield">Specifications</button>
             </div>
@@ -514,7 +526,8 @@ Firewall: Datura Privacy Shield">Specifications</button>
                 <img src="devices/stone/stone.png" alt="POCO X5 5G" onerror="this.src='profile/avatar.png'">
             </div>
             <div class="card-actions">
-                <button class="btn-download"
+                <button class="btn-download" type="button"
+                    data-ota="devices/stone/stone.json"
                     data-name="POCO X5 5G"
                     data-codename="stone (moonstone)"
                     data-maintainer="@Parvez52 (MASUD PARVEZ)"
@@ -527,13 +540,14 @@ Firewall: Datura Privacy Shield">Specifications</button>
                     data-release="https://github.com/GazaOS/releases/releases/download/261124/GazaOSAndroid-16.2-20261124-stone-v16.2.zip"
                     data-pixeldrain="https://pixeldrain.com/u/stone-16.2"
                     data-gofile="https://gofile.io/d/stone-16.2">Download</button>
-                <button class="btn-spec"
+                <button class="btn-spec" type="button"
                     data-name="POCO X5 5G (moonstone)"
                     data-specs="Chipset: Qualcomm Snapdragon® 695 5G (SM6375)
 RAM: 6 / 8 GB LPDDR4X
 Storage: 128 / 256 GB UFS 2.2
 Display: 6.67&quot; AMOLED, 120Hz, FHD+ (2400x1080)
 Battery: 5000 mAh, 33W Fast Charging
+UI: GazaOS Hybrid, HyperOS &amp; ColorOS Presets + Mist QS
 Audio: Dolby Atmos + ViPER4Android FX
 Firewall: Datura Privacy Shield">Specifications</button>
             </div>
@@ -556,22 +570,20 @@ Firewall: Datura Privacy Shield">Specifications</button>
     </div>
 
     <!-- Modal Dialog -->
-    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <h2 id="modalTitle"></h2>
             <div class="modal-body" id="modalBody"></div>
-            <button class="btn-close" id="btnClose">Close</button>
+            <button class="btn-close" id="btnClose" type="button">Close</button>
         </div>
     </div>
 
     <footer><p>© 2026 GazaOS Organization. Released under Apache 2.0.<br>❤️ Free Palestine 🇵🇸</p></footer>
 
     <script>
-        // Particle background
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouseX = 0, mouseY = 0;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -634,7 +646,56 @@ Firewall: Datura Privacy Shield">Specifications</button>
         }
         animateParticles();
 
-        // Nav handle & avatar dropdown
+        const navEl = document.querySelector('nav');
+        const navHandle = document.getElementById('navHandle');
+        navEl.addEventListener('animationend', () => {
+            navEl.style.animation = 'none';
+        }, { once: true });
+
+        function hideNav() {
+            navEl.classList.add('nav-hidden');
+            navHandle.classList.add('visible');
+        }
+        function showNav() {
+            navEl.classList.remove('nav-hidden');
+            navHandle.classList.remove('visible');
+        }
+        function makeDraggable(el, { onHide, onShow, direction }) {
+            let dragging = false;
+            let startY = 0;
+            function onMove(e) {
+                if (!dragging) return;
+                const deltaY = e.clientY - startY;
+                if (direction === 'hide' && deltaY < 0) {
+                    navEl.style.transform = `translateY(${deltaY}px)`;
+                } else if (direction === 'show' && deltaY > 0) {
+                    navEl.style.transform = `translateY(${-150 + Math.min(deltaY, 150) / 150 * 150}%)`;
+                }
+            }
+            function onUp(e) {
+                if (!dragging) return;
+                dragging = false;
+                navEl.style.transition = '';
+                navEl.style.transform = '';
+                const deltaY = e.clientY - startY;
+                if (direction === 'hide' && deltaY < -25) onHide();
+                if (direction === 'show' && deltaY > 25) onShow();
+                window.removeEventListener('pointermove', onMove);
+                window.removeEventListener('pointerup', onUp);
+            }
+            el.addEventListener('pointerdown', (e) => {
+                if (e.target.closest('input, button, a')) return;
+                dragging = true;
+                startY = e.clientY;
+                navEl.style.transition = 'none';
+                window.addEventListener('pointermove', onMove);
+                window.addEventListener('pointerup', onUp);
+            });
+        }
+        makeDraggable(navEl, { onHide: hideNav, direction: 'hide' });
+        makeDraggable(navHandle, { onShow: showNav, direction: 'show' });
+        navHandle.addEventListener('click', showNav);
+
         const avatarBtn = document.getElementById('avatarBtn');
         const avatarDropdown = document.getElementById('avatarDropdown');
         avatarBtn.addEventListener('click', (e) => {
@@ -662,24 +723,49 @@ Firewall: Datura Privacy Shield">Specifications</button>
                 const name = (card.getAttribute('data-name') || '').toLowerCase();
                 const codename = (card.getAttribute('data-codename') || '').toLowerCase();
 
-                const matchesBrand = activeBrand === 'all' || brand.toLowerCase().includes(activeBrand.toLowerCase());
+                const matchesBrand = activeBrand === 'all' || brand === 'all' || brand.toLowerCase().includes(activeBrand.toLowerCase());
                 const matchesQuery = query === '' || name.includes(query) || codename.includes(query) || brand.toLowerCase().includes(query);
 
-                if (matchesBrand && matchesQuery) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+                card.classList.toggle('hidden', !(matchesBrand && matchesQuery));
             });
         }
 
         searchInput.addEventListener('input', filterDevices);
-
         brandChips.forEach(chip => {
             chip.addEventListener('click', () => {
                 brandChips.forEach(c => c.classList.remove('active'));
                 chip.classList.add('active');
                 filterDevices();
+            });
+        });
+
+        // Hydrate live OTA metadata from JSON manifests when served over HTTP(S)
+        function formatBytes(bytes) {
+            if (!bytes || Number.isNaN(Number(bytes))) return '';
+            return (Number(bytes) / (1024 ** 3)).toFixed(2) + ' GB';
+        }
+        function formatDate(ts) {
+            if (!ts || Number.isNaN(Number(ts))) return '';
+            return new Date(Number(ts) * 1000).toISOString().slice(0, 10);
+        }
+        const otaButtons = Array.from(document.querySelectorAll('button.btn-download[data-ota]'));
+        const otaCache = new Map();
+        otaButtons.forEach(btn => {
+            const url = btn.getAttribute('data-ota');
+            if (!url) return;
+            if (!otaCache.has(url)) {
+                otaCache.set(url, fetch(url).then(r => (r.ok ? r.json() : null)).catch(() => null));
+            }
+            otaCache.get(url).then(data => {
+                const entry = data && Array.isArray(data.response) ? data.response[0] : null;
+                if (!entry) return;
+                if (entry.version) btn.setAttribute('data-version', `${entry.version} (Baklava)`);
+                if (entry.download) btn.setAttribute('data-release', entry.download);
+                if (entry.filename) btn.setAttribute('data-filename', entry.filename);
+                if (entry.md5) btn.setAttribute('data-md5', entry.md5);
+                if (entry.sha256) btn.setAttribute('data-sha256', entry.sha256);
+                if (entry.size) btn.setAttribute('data-size', formatBytes(entry.size));
+                if (entry.timestamp) btn.setAttribute('data-builddate', formatDate(entry.timestamp));
             });
         });
 
@@ -694,7 +780,6 @@ Firewall: Datura Privacy Shield">Specifications</button>
             modalBody.innerHTML = htmlContent;
             modalOverlay.classList.add('active');
         }
-
         function closeModal() {
             modalOverlay.classList.remove('active');
         }
@@ -703,9 +788,13 @@ Firewall: Datura Privacy Shield">Specifications</button>
         modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) closeModal();
         });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
 
-        // Specs click handler
-        document.querySelectorAll('.btn-spec').forEach(btn => {
+        document.querySelectorAll('button.btn-spec').forEach(btn => {
             btn.addEventListener('click', () => {
                 const name = btn.getAttribute('data-name');
                 const specs = btn.getAttribute('data-specs');
@@ -716,8 +805,7 @@ Firewall: Datura Privacy Shield">Specifications</button>
             });
         });
 
-        // Download click handler
-        document.querySelectorAll('.btn-download').forEach(btn => {
+        document.querySelectorAll('button.btn-download').forEach(btn => {
             btn.addEventListener('click', () => {
                 const name = btn.getAttribute('data-name');
                 const codename = btn.getAttribute('data-codename');
@@ -726,6 +814,8 @@ Firewall: Datura Privacy Shield">Specifications</button>
                 const size = btn.getAttribute('data-size');
                 const date = btn.getAttribute('data-builddate');
                 const md5 = btn.getAttribute('data-md5');
+                const sha256 = btn.getAttribute('data-sha256');
+                const filename = btn.getAttribute('data-filename');
                 const release = btn.getAttribute('data-release');
                 const pixeldrain = btn.getAttribute('data-pixeldrain');
                 const gofile = btn.getAttribute('data-gofile');
@@ -735,19 +825,21 @@ Firewall: Datura Privacy Shield">Specifications</button>
                         <div style="font-size: 0.95rem; margin-bottom: 12px;"><b>Device:</b> ${name} (${codename})</div>
                         <div style="font-size: 0.85rem; color: #a3a3a3;"><b>Maintainer:</b> ${maintainer}</div>
                         <div style="font-size: 0.85rem; color: #a3a3a3;"><b>Version:</b> GazaOS ${version}</div>
+                        <div style="font-size: 0.85rem; color: #a3a3a3;"><b>Package:</b> <code>${filename}</code></div>
                         <div style="font-size: 0.85rem; color: #a3a3a3;"><b>Date:</b> ${date} &bull; <b>Size:</b> ${size}</div>
-                        <div style="font-size: 0.8rem; color: #737373; margin-top: 6px; word-break: break-all;"><b>MD5:</b> <code>${md5}</code></div>
+                        <div style="font-size: 0.78rem; color: #737373; margin-top: 8px; word-break: break-all;"><b>MD5:</b> <code>${md5}</code></div>
+                        ${sha256 ? `<div style="font-size: 0.78rem; color: #737373; margin-top: 4px; word-break: break-all;"><b>SHA-256:</b> <code>${sha256}</code></div>` : ''}
 
                         <div class="download-links-list">
-                            <a href="${release}" class="download-btn-pill" target="_blank">
+                            <a href="${release}" class="download-btn-pill" target="_blank" rel="noopener noreferrer">
                                 <span>🚀 <b>GitHub Release (Direct)</b></span>
                                 <span>⬇️</span>
                             </a>
-                            <a href="${pixeldrain}" class="download-btn-pill" target="_blank">
+                            <a href="${pixeldrain}" class="download-btn-pill" target="_blank" rel="noopener noreferrer">
                                 <span>⚡ <b>Pixeldrain Mirror</b></span>
                                 <span>⬇️</span>
                             </a>
-                            <a href="${gofile}" class="download-btn-pill" target="_blank">
+                            <a href="${gofile}" class="download-btn-pill" target="_blank" rel="noopener noreferrer">
                                 <span>🌐 <b>Gofile Fast Mirror</b></span>
                                 <span>⬇️</span>
                             </a>

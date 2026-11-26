@@ -92,7 +92,7 @@
             50% { transform: translate(-30vw, -20vh); }
         }
 
-        nav, .container, .page-header, .team-section { position: relative; z-index: 2; }
+        nav, .container, .page-header, .team-section, .footer { position: relative; z-index: 2; }
 
         @keyframes navReveal {
             0% { transform: translateY(-150%); opacity: 0; }
@@ -119,10 +119,10 @@
             transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
             touch-action: pan-x;
             cursor: grab;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
         }
         nav:hover {
-            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
         }
         nav:active { cursor: grabbing; }
         nav.nav-hidden { transform: translateY(-150%); }
@@ -156,17 +156,33 @@
             font-weight: 500;
             padding: 8px 14px;
             border-radius: 50px;
-            transition: 0.25s ease;
+            transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
             white-space: nowrap;
+            position: relative;
+            overflow: hidden;
         }
-        .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.08); }
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50px;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::before { transform: scale(1); opacity: 1; }
         .nav-links a.active { color: #000; background: #ffffff; }
+        .nav-links a.active::before { display: none; }
+        .nav-links a:active { transform: scale(0.95); }
 
         .avatar-menu { position: relative; }
         .avatar-btn {
             width: 34px; height: 34px;
             border-radius: 50%;
             border: 1px solid var(--border);
+            padding: 0;
             cursor: pointer;
             overflow: hidden;
             background: #111;
@@ -175,7 +191,8 @@
             justify-content: center;
             transition: 0.3s;
         }
-        .avatar-btn img { width: 100%; height: 100%; object-fit: cover; }
+        .avatar-btn:hover { border-color: rgba(255,255,255,0.4); transform: scale(1.05); }
+        .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         .avatar-dropdown {
             position: absolute;
@@ -195,14 +212,16 @@
             visibility: hidden;
             pointer-events: none;
             transform: translateY(-16px) scale(0.75);
-            transition: 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.4s;
         }
         .avatar-dropdown.open { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
         .avatar-dropdown a {
             background: white; color: black; text-decoration: none;
             font-size: 0.85rem; font-weight: bold; padding: 10px 22px;
             border-radius: 50px; text-align: center;
+            transition: transform 0.2s ease, background 0.2s ease;
         }
+        .avatar-dropdown a:hover { transform: scale(1.05); background: #f0f0f0; }
 
         .page-header {
             text-align: center;
@@ -348,7 +367,7 @@
     <nav>
         <div class="nav-left">
             <div class="avatar-menu">
-                <button class="avatar-btn" id="avatarBtn" aria-label="Organization links">
+                <button class="avatar-btn" id="avatarBtn" type="button" aria-label="Organization links">
                     <img src="profile/avatar.png" alt="GazaOS" width="200" height="200">
                 </button>
                 <div class="avatar-dropdown" id="avatarDropdown">
@@ -369,7 +388,7 @@
 
     <section class="page-header">
         <h1>Core <span>Team</span></h1>
-        <p>The architects, maintainers, and contributors behind GazaOS.</p>
+        <p>The architects, maintainers, and UI crafters behind GazaOS.</p>
     </section>
 
     <section class="team-section">
@@ -381,8 +400,8 @@
                     <img src="team/farhan.png" alt="Farhan Muh Tasim" onerror="this.src='profile/avatar.png'">
                 </div>
                 <div class="team-name">Farhan Muh Tasim</div>
-                <div class="team-role">Lead Developer &bull; Core Systems</div>
-                <div class="team-bio">Lead developer of GazaOS. Core frameworks, vendor build pipelines, upstream open-source porting, and system architecture.</div>
+                <div class="team-role">Lead Developer &bull; Core Systems &amp; UI</div>
+                <div class="team-bio">Lead developer of GazaOS. HyperOS/ColorOS/Hybrid Settings UI, SystemUI &amp; Gaza Lab engineering, vendor build pipelines, and core architecture.</div>
                 <div class="team-socials">
                     <a href="https://github.com/Gtajisan" target="_blank" rel="noopener noreferrer" aria-label="GitHub (Gtajisan)" title="GitHub (@Gtajisan)">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.02-.01-1.86-2.78.61-3.37-1.19-3.37-1.19-.45-1.17-1.11-1.48-1.11-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.9-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
@@ -423,8 +442,11 @@
                 <div class="team-role">Contributors &bull; Maintainers</div>
                 <div class="team-bio">Device maintainers, QA testers, and community members building the future of freedom in Android.</div>
                 <div class="team-socials">
-                    <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub (GazaOS)">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.02-.01-1.86-2.78.61-3.37-1.19-3.37-1.19-.45-1.17-1.11-1.48-1.11-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.9-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+                    </a>
+                    <a href="https://t.me/GazaOS" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram (@GazaOS)">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.3-.07-.46-.52-.16L7.74 13.3 3.64 12c-.9-.28-.9-.9.19-1.33l15.94-6.14c.75-.33 1.46.18 1.18 1.31l-2.71 12.79c-.19.9-.72 1.12-1.46.7l-4.03-2.98-1.94 1.87c-.21.21-.39.39-.79.39z"/></svg>
                     </a>
                 </div>
             </div>
@@ -440,7 +462,6 @@
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouseX = 0, mouseY = 0;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -502,6 +523,55 @@
             requestAnimationFrame(animateParticles);
         }
         animateParticles();
+
+        const navEl = document.querySelector('nav');
+        const navHandle = document.getElementById('navHandle');
+        navEl.addEventListener('animationend', () => {
+            navEl.style.animation = 'none';
+        }, { once: true });
+
+        function hideNav() {
+            navEl.classList.add('nav-hidden');
+            navHandle.classList.add('visible');
+        }
+        function showNav() {
+            navEl.classList.remove('nav-hidden');
+            navHandle.classList.remove('visible');
+        }
+        function makeDraggable(el, { onHide, onShow, direction }) {
+            let dragging = false;
+            let startY = 0;
+            function onMove(e) {
+                if (!dragging) return;
+                const deltaY = e.clientY - startY;
+                if (direction === 'hide' && deltaY < 0) {
+                    navEl.style.transform = `translateY(${deltaY}px)`;
+                } else if (direction === 'show' && deltaY > 0) {
+                    navEl.style.transform = `translateY(${-150 + Math.min(deltaY, 150) / 150 * 150}%)`;
+                }
+            }
+            function onUp(e) {
+                if (!dragging) return;
+                dragging = false;
+                navEl.style.transition = '';
+                navEl.style.transform = '';
+                const deltaY = e.clientY - startY;
+                if (direction === 'hide' && deltaY < -25) onHide();
+                if (direction === 'show' && deltaY > 25) onShow();
+                window.removeEventListener('pointermove', onMove);
+                window.removeEventListener('pointerup', onUp);
+            }
+            el.addEventListener('pointerdown', (e) => {
+                dragging = true;
+                startY = e.clientY;
+                navEl.style.transition = 'none';
+                window.addEventListener('pointermove', onMove);
+                window.addEventListener('pointerup', onUp);
+            });
+        }
+        makeDraggable(navEl, { onHide: hideNav, direction: 'hide' });
+        makeDraggable(navHandle, { onShow: showNav, direction: 'show' });
+        navHandle.addEventListener('click', showNav);
 
         const avatarBtn = document.getElementById('avatarBtn');
         const avatarDropdown = document.getElementById('avatarDropdown');
