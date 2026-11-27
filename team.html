@@ -2,588 +2,110 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>GazaOS — Core Team</title>
-    <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GazaOS Contributors — Core Team</title>
     <link rel="icon" type="image/svg+xml" href="profile/gazaos-logo.svg">
-    <style>
-        :root {
-            --bg: #000000;
-            --text: #ffffff;
-            --subtext: #9a9a9a;
-            --border: rgba(255, 255, 255, 0.12);
-            --card-bg: #080808;
-            --nav-bg: rgba(10, 10, 10, 0.7);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Product Sans', sans-serif !important;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        #particleCanvas {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .top-line {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            z-index: 10;
-            background: linear-gradient(to right, transparent 0%, #10b981 30%, #ffffff 50%, #ef4444 70%, transparent 100%);
-            pointer-events: none;
-        }
-
-        .glare-bg {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .glare-bg::before, .glare-bg::after {
-            content: '';
-            position: absolute;
-            width: 60vmax;
-            height: 60vmax;
-            border-radius: 50%;
-            filter: blur(90px);
-            mix-blend-mode: screen;
-            opacity: 0.10;
-        }
-        .glare-bg::before {
-            top: -20%;
-            left: -10%;
-            background: radial-gradient(circle, #10b981 0%, transparent 70%);
-            animation: glare-drift-1 18s ease-in-out infinite;
-        }
-        .glare-bg::after {
-            bottom: -25%;
-            right: -15%;
-            background: radial-gradient(circle, #ef4444 0%, transparent 70%);
-            animation: glare-drift-2 22s ease-in-out infinite;
-        }
-        @keyframes glare-drift-1 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(35vw, 25vh); }
-        }
-        @keyframes glare-drift-2 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-30vw, -20vh); }
-        }
-
-        nav, .container, .page-header, .team-section, .footer { position: relative; z-index: 2; }
-
-        @keyframes navReveal {
-            0% { transform: translateY(-150%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        nav {
-            position: fixed;
-            top: 25px;
-            left: 25px;
-            right: 25px;
-            width: auto;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.65);
-            backdrop-filter: blur(24px) saturate(1.4);
-            -webkit-backdrop-filter: blur(24px) saturate(1.4);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 100px;
-            padding: 6px 18px 6px 6px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            animation: navReveal 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
-            transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
-            touch-action: pan-x;
-            cursor: grab;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
-        }
-        nav:hover {
-            box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
-        }
-        nav:active { cursor: grabbing; }
-        nav.nav-hidden { transform: translateY(-150%); }
-
-        .nav-handle {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            width: 60px;
-            height: 5px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.35);
-            z-index: 1001;
-            cursor: pointer;
-            touch-action: none;
-            transform: translateX(-50%) scaleX(0);
-            opacity: 0;
-            pointer-events: none;
-            transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s;
-        }
-        .nav-handle.visible { transform: translateX(-50%) scaleX(1); opacity: 1; pointer-events: auto; }
-        .nav-handle:hover { background: rgba(255, 255, 255, 0.6); }
-
-        .nav-left { display: flex; align-items: center; gap: 12px; }
-        .nav-brand-title { font-size: 0.95rem; font-weight: bold; color: white; }
-        .nav-links { display: flex; align-items: center; gap: 4px; }
-        .nav-links a {
-            color: var(--subtext);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 8px 14px;
-            border-radius: 50px;
-            transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-        }
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0.08);
-            border-radius: 50px;
-            transform: scale(0.8);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--text); }
-        .nav-links a:hover::before { transform: scale(1); opacity: 1; }
-        .nav-links a.active { color: #000; background: #ffffff; }
-        .nav-links a.active::before { display: none; }
-        .nav-links a:active { transform: scale(0.95); }
-
-        .avatar-menu { position: relative; }
-        .avatar-btn {
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            padding: 0;
-            cursor: pointer;
-            overflow: hidden;
-            background: #111;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-        }
-        .avatar-btn:hover { border-color: rgba(255,255,255,0.4); transform: scale(1.05); }
-        .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-        .avatar-dropdown {
-            position: absolute;
-            top: calc(100% + 12px);
-            left: 0;
-            background: rgba(8, 8, 8, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            padding: 8px;
-            min-width: 170px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            backdrop-filter: blur(24px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: translateY(-16px) scale(0.75);
-            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.4s;
-        }
-        .avatar-dropdown.open { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
-        .avatar-dropdown a {
-            background: white; color: black; text-decoration: none;
-            font-size: 0.85rem; font-weight: bold; padding: 10px 22px;
-            border-radius: 50px; text-align: center;
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-        .avatar-dropdown a:hover { transform: scale(1.05); background: #f0f0f0; }
-
-        .page-header {
-            text-align: center;
-            padding: 140px 20px 20px;
-        }
-        .page-header h1 {
-            font-size: 3.2rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .page-header p {
-            color: var(--subtext);
-            font-size: 1.05rem;
-        }
-
-        .team-section {
-            max-width: 1100px;
-            margin: 40px auto 100px;
-            padding: 0 5%;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            justify-content: center;
-        }
-
-        .team-card {
-            background: rgba(8, 8, 8, 0.75);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 40px 30px;
-            text-align: center;
-            backdrop-filter: blur(14px);
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s, box-shadow 0.4s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .team-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            background: rgba(12, 12, 12, 0.85);
-        }
-
-        .team-avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 2px solid var(--border);
-            overflow: hidden;
-            margin-bottom: 20px;
-            position: relative;
-            background: #111;
-            transition: transform 0.4s ease, border-color 0.3s;
-        }
-        .team-card:hover .team-avatar {
-            transform: scale(1.08);
-            border-color: #10b981;
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);
-        }
-        .team-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .team-name {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: white;
-            margin-bottom: 4px;
-        }
-        .team-role {
-            font-size: 0.85rem;
-            color: #10b981;
-            margin-bottom: 16px;
-        }
-        .team-bio {
-            font-size: 0.85rem;
-            color: var(--subtext);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .team-socials {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: auto;
-        }
-        .team-socials a {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            color: white;
-            transition: 0.3s ease;
-            text-decoration: none;
-        }
-        .team-socials a:hover {
-            background: white;
-            color: black;
-            transform: scale(1.1);
-        }
-        .team-socials svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .footer {
-            text-align: center;
-            font-size: 0.82rem;
-            color: #555;
-            margin-top: 60px;
-            padding-bottom: 50px;
-            border-top: 1px solid var(--border);
-            padding-top: 40px;
-        }
-
-        @media (max-width: 768px) {
-            .page-header h1 { font-size: 2.5rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+    <div class="top-tricolor"></div>
 
-    <canvas id="particleCanvas"></canvas>
-    <div class="glare-bg"></div>
-    <div class="top-line"></div>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./index.html" class="brand-lockup" aria-label="GazaOS Home">
+                <img src="profile/gazaos-org-logo.svg" alt="GazaOS Organization Logo" class="org-logo-img">
+            </a>
 
-    <nav>
-        <div class="nav-left">
-            <div class="avatar-menu">
-                <button class="avatar-btn" id="avatarBtn" type="button" aria-label="Organization links">
-                    <img src="profile/gazaos-logo.svg" alt="GazaOS Logo" width="200" height="200">
-                </button>
-                <div class="avatar-dropdown" id="avatarDropdown">
-                    <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://github.com/GazaOS/OTA" target="_blank" rel="noopener noreferrer">OTA &amp; Changelogs</a>
-                    <a href="https://t.me/GazaOS" target="_blank" rel="noopener noreferrer">Telegram</a>
-                </div>
+            <nav class="nav-menu" aria-label="Primary">
+                <a href="./index.html">Overview</a>
+                <a href="./index.html#pillars">Features</a>
+                <a href="./devices.html">Downloads</a>
+                <a href="./team.html" class="active">Contributors</a>
+                <a href="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt" target="_blank" rel="noopener noreferrer">Changelog</a>
+                <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme">☀️ Light</button>
             </div>
-            <span class="nav-brand-title">GazaOS</span>
         </div>
-        <div class="nav-links">
-            <a href="./index.html">About</a>
-            <a href="./devices.html">Devices</a>
-            <a href="./team.html" class="active">Team</a>
-        </div>
-    </nav>
+    </header>
 
-    <div class="nav-handle" id="navHandle" title="Pull down to show menu"></div>
+    <main class="container">
+        <section class="page-banner">
+            <div class="eyebrow-pill">Open Source Contributors</div>
+            <h1>Core Team &amp; Maintainers</h1>
+            <p>The engineers, UI architects, and device maintainers building GazaOS openly under Apache 2.0.</p>
+        </section>
 
-    <section class="page-header">
-        <h1>Core <span>Team</span></h1>
-        <p>The architects, maintainers, and UI crafters behind GazaOS.</p>
-    </section>
-
-    <section class="team-section">
-        <div class="team-grid">
-
-            <!-- Farhan Muh Tasim (Gtajisan / frnAlt) -->
-            <div class="team-card">
+        <section class="team-grid">
+            <article class="team-card">
                 <div class="team-avatar">
                     <img src="team/farhan.png" alt="Farhan Muh Tasim" onerror="this.src='profile/gazaos-logo.svg'">
                 </div>
-                <div class="team-name">Farhan Muh Tasim</div>
+                <h2>Farhan Muh Tasim</h2>
                 <div class="team-role">Lead Developer &bull; Core Systems &amp; UI</div>
-                <div class="team-bio">Lead developer of GazaOS. HyperOS/ColorOS/Hybrid Settings UI, SystemUI &amp; Gaza Lab engineering, vendor build pipelines, and core architecture.</div>
-                <div class="team-socials">
-                    <a href="https://github.com/Gtajisan" target="_blank" rel="noopener noreferrer" aria-label="GitHub (Gtajisan)" title="GitHub (@Gtajisan)">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.02-.01-1.86-2.78.61-3.37-1.19-3.37-1.19-.45-1.17-1.11-1.48-1.11-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.9-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                    </a>
-                    <a href="https://github.com/frnAlt" target="_blank" rel="noopener noreferrer" aria-label="GitHub (frnAlt)" title="GitHub (@frnAlt)">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.02-.01-1.86-2.78.61-3.37-1.19-3.37-1.19-.45-1.17-1.11-1.48-1.11-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.9-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                    </a>
-                    <a href="https://t.me/FARHAN_MUH_TASIM" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.3-.07-.46-.52-.16L7.74 13.3 3.64 12c-.9-.28-.9-.9.19-1.33l15.94-6.14c.75-.33 1.46.18 1.18 1.31l-2.71 12.79c-.19.9-.72 1.12-1.46.7l-4.03-2.98-1.94 1.87c-.21.21-.39.39-.79.39z"/></svg>
-                    </a>
+                <p class="team-bio">Lead architect of GazaOS. HyperOS Control Center QS, AOSP Look Lite, Settings Compose UI, Gaza Lab, and build infrastructure.</p>
+                <div class="social-row">
+                    <a href="https://github.com/Gtajisan" target="_blank" rel="noopener noreferrer">GitHub @Gtajisan</a>
+                    <a href="https://github.com/frnAlt" target="_blank" rel="noopener noreferrer">@frnAlt</a>
+                    <a href="https://t.me/FARHAN_MUH_TASIM" target="_blank" rel="noopener noreferrer">Telegram</a>
                 </div>
-            </div>
+            </article>
 
-            <!-- MASUD PARVEZ -->
-            <div class="team-card">
+            <article class="team-card">
                 <div class="team-avatar">
                     <img src="team/parvez.png" alt="Masud Parvez" onerror="this.src='profile/gazaos-logo.svg'">
                 </div>
-                <div class="team-name">Masud Parvez</div>
+                <h2>Masud Parvez</h2>
                 <div class="team-role">Official Device Maintainer &bull; stone</div>
-                <div class="team-bio">Official device maintainer for Xiaomi Redmi Note 12 5G / POCO X5 5G (stone / sunstone / moonstone).</div>
-                <div class="team-socials">
-                    <a href="https://github.com/Parvez52" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub (@Parvez52)">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.02-.01-1.86-2.78.61-3.37-1.19-3.37-1.19-.45-1.17-1.11-1.48-1.11-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.9-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                    </a>
-                    <a href="https://t.me/Parvez52" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram (@Parvez52)">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.3-.07-.46-.52-.16L7.74 13.3 3.64 12c-.9-.28-.9-.9.19-1.33l15.94-6.14c.75-.33 1.46.18 1.18 1.31l-2.71 12.79c-.19.9-.72 1.12-1.46.7l-4.03-2.98-1.94 1.87c-.21.21-.39.39-.79.39z"/></svg>
-                    </a>
+                <p class="team-bio">Official device maintainer for Xiaomi Redmi Note 12 5G / POCO X5 5G (<code>stone</code> / <code>sunstone</code> / <code>moonstone</code>).</p>
+                <div class="social-row">
+                    <a href="https://github.com/Gtajisan/stone/releases" target="_blank" rel="noopener noreferrer">Stone Releases</a>
+                    <a href="https://github.com/Parvez52" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://t.me/Parvez52" target="_blank" rel="noopener noreferrer">Telegram</a>
                 </div>
-            </div>
+            </article>
 
-            <!-- GazaOS Community -->
-            <div class="team-card">
+            <article class="team-card">
                 <div class="team-avatar">
                     <img src="profile/gazaos-logo.svg" alt="GazaOS Community">
                 </div>
-                <div class="team-name">GazaOS Community</div>
-                <div class="team-role">Contributors &bull; Maintainers</div>
-                <div class="team-bio">Device maintainers, QA testers, and community members building the future of freedom in Android.</div>
-                <div class="team-socials">
-                    <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub (GazaOS)">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.02-.01-1.86-2.78.61-3.37-1.19-3.37-1.19-.45-1.17-1.11-1.48-1.11-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.9-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                    </a>
-                    <a href="https://t.me/GazaOS" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram (@GazaOS)">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.3-.07-.46-.52-.16L7.74 13.3 3.64 12c-.9-.28-.9-.9.19-1.33l15.94-6.14c.75-.33 1.46.18 1.18 1.31l-2.71 12.79c-.19.9-.72 1.12-1.46.7l-4.03-2.98-1.94 1.87c-.21.21-.39.39-.79.39z"/></svg>
-                    </a>
+                <h2>GazaOS Community</h2>
+                <div class="team-role">Contributors &amp; Device Maintainers</div>
+                <p class="team-bio">Testers, porters, and open-source contributors extending GazaOS 16.2 to devices worldwide.</p>
+                <div class="social-row">
+                    <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer">GitHub Org</a>
+                    <a href="https://github.com/GazaOS/OTA" target="_blank" rel="noopener noreferrer">OTA Repo</a>
+                    <a href="https://t.me/GazaOS" target="_blank" rel="noopener noreferrer">Telegram</a>
                 </div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <span>&copy; 2026 GazaOS Organization. Licensed under Apache 2.0.</span>
+                <span>❤️ Free Palestine 🇵🇸</span>
             </div>
-
         </div>
-    </section>
-
-    <div class="footer">
-        <p>© 2026 GazaOS Organization. Released under Apache 2.0.<br>❤️ With solidarity for Palestine 🇵🇸</p>
-    </div>
+    </footer>
 
     <script>
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        const htmlEl = document.documentElement;
+        const themeBtn = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('gazaos-theme') || 'dark';
+        htmlEl.setAttribute('data-theme', savedTheme);
+        function syncThemeLabel() {
+            themeBtn.textContent = htmlEl.getAttribute('data-theme') === 'light' ? '🌙 Dark' : '☀️ Light';
         }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.6;
-                this.speedX = (Math.random() - 0.5) * 0.35;
-                this.speedY = (Math.random() - 0.5) * 0.35;
-                this.opacity = Math.random() * 0.5 + 0.15;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.y < 0) this.y = canvas.height;
-                if (this.y > canvas.height) this.y = 0;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
-            for (let i = 0; i < count; i++) particles.push(new Particle());
-        }
-        initParticles();
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx*dx + dy*dy);
-                    if (dist < 110) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.06 * (1 - dist/110)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        const navEl = document.querySelector('nav');
-        const navHandle = document.getElementById('navHandle');
-        navEl.addEventListener('animationend', () => {
-            navEl.style.animation = 'none';
-        }, { once: true });
-
-        function hideNav() {
-            navEl.classList.add('nav-hidden');
-            navHandle.classList.add('visible');
-        }
-        function showNav() {
-            navEl.classList.remove('nav-hidden');
-            navHandle.classList.remove('visible');
-        }
-        function makeDraggable(el, { onHide, onShow, direction }) {
-            let dragging = false;
-            let startY = 0;
-            function onMove(e) {
-                if (!dragging) return;
-                const deltaY = e.clientY - startY;
-                if (direction === 'hide' && deltaY < 0) {
-                    navEl.style.transform = `translateY(${deltaY}px)`;
-                } else if (direction === 'show' && deltaY > 0) {
-                    navEl.style.transform = `translateY(${-150 + Math.min(deltaY, 150) / 150 * 150}%)`;
-                }
-            }
-            function onUp(e) {
-                if (!dragging) return;
-                dragging = false;
-                navEl.style.transition = '';
-                navEl.style.transform = '';
-                const deltaY = e.clientY - startY;
-                if (direction === 'hide' && deltaY < -25) onHide();
-                if (direction === 'show' && deltaY > 25) onShow();
-                window.removeEventListener('pointermove', onMove);
-                window.removeEventListener('pointerup', onUp);
-            }
-            el.addEventListener('pointerdown', (e) => {
-                dragging = true;
-                startY = e.clientY;
-                navEl.style.transition = 'none';
-                window.addEventListener('pointermove', onMove);
-                window.addEventListener('pointerup', onUp);
-            });
-        }
-        makeDraggable(navEl, { onHide: hideNav, direction: 'hide' });
-        makeDraggable(navHandle, { onShow: showNav, direction: 'show' });
-        navHandle.addEventListener('click', showNav);
-
-        const avatarBtn = document.getElementById('avatarBtn');
-        const avatarDropdown = document.getElementById('avatarDropdown');
-        avatarBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            avatarDropdown.classList.toggle('open');
-        });
-        document.addEventListener('click', (e) => {
-            if (!avatarDropdown.contains(e.target) && e.target !== avatarBtn) {
-                avatarDropdown.classList.remove('open');
-            }
+        syncThemeLabel();
+        themeBtn.addEventListener('click', () => {
+            const next = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            htmlEl.setAttribute('data-theme', next);
+            localStorage.setItem('gazaos-theme', next);
+            syncThemeLabel();
         });
     </script>
 </body>

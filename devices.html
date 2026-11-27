@@ -2,856 +2,302 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>GazaOS — Supported Devices</title>
-    <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GazaOS Downloads — Official Builds</title>
+    <meta name="description" content="Download official GazaOS 16.2 Vanilla and HyperOS-Hybrid builds, boot images, SHA-256 checksums, and changelogs.">
     <link rel="icon" type="image/svg+xml" href="profile/gazaos-logo.svg">
-    <style>
-        :root {
-            --bg: #000000;
-            --card-bg: #080808;
-            --border: rgba(255, 255, 255, 0.09);
-            --text-main: #ffffff;
-            --text-dim: #9a9a9a;
-            --nav-bg: rgba(10, 10, 10, 0.7);
-            --accent-green: #10b981;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Product Sans', sans-serif !important; }
-        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; position: relative; }
-
-        #particleCanvas {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .top-line {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            z-index: 10;
-            background: linear-gradient(to right, transparent 0%, #10b981 30%, #ffffff 50%, #ef4444 70%, transparent 100%);
-            pointer-events: none;
-        }
-
-        .glare-bg {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .glare-bg::before, .glare-bg::after {
-            content: '';
-            position: absolute;
-            width: 60vmax;
-            height: 60vmax;
-            border-radius: 50%;
-            filter: blur(90px);
-            mix-blend-mode: screen;
-            opacity: 0.10;
-        }
-        .glare-bg::before {
-            top: -20%;
-            left: -10%;
-            background: radial-gradient(circle, #10b981 0%, transparent 70%);
-            animation: glare-drift-1 18s ease-in-out infinite;
-        }
-        .glare-bg::after {
-            bottom: -25%;
-            right: -15%;
-            background: radial-gradient(circle, #ef4444 0%, transparent 70%);
-            animation: glare-drift-2 22s ease-in-out infinite;
-        }
-        @keyframes glare-drift-1 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(35vw, 25vh); }
-        }
-        @keyframes glare-drift-2 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-30vw, -20vh); }
-        }
-
-        @keyframes navReveal {
-            0% { transform: translateY(-150%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        nav {
-            position: fixed;
-            top: 25px;
-            left: 25px;
-            right: 25px;
-            width: auto;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.65);
-            backdrop-filter: blur(24px) saturate(1.4);
-            -webkit-backdrop-filter: blur(24px) saturate(1.4);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 100px;
-            padding: 6px 18px 6px 6px;
-            display: grid;
-            grid-template-columns: auto minmax(140px, 220px) 1fr auto;
-            align-items: center;
-            gap: 12px;
-            animation: navReveal 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
-            transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
-            touch-action: pan-x;
-            cursor: grab;
-        }
-        nav:hover {
-            box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
-        }
-        nav:active { cursor: grabbing; }
-        nav.nav-hidden { transform: translateY(-150%); }
-
-        .nav-handle {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            width: 60px;
-            height: 5px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.35);
-            z-index: 1001;
-            cursor: pointer;
-            touch-action: none;
-            transform: translateX(-50%) scaleX(0);
-            opacity: 0;
-            pointer-events: none;
-            transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s;
-        }
-        .nav-handle.visible {
-            transform: translateX(-50%) scaleX(1);
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .nav-handle:hover { background: rgba(255, 255, 255, 0.6); }
-
-        .nav-links { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
-        .nav-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 8px 14px;
-            border-radius: 50px;
-            transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-        }
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0.08);
-            border-radius: 50px;
-            transform: scale(0.8);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--text-main); }
-        .nav-links a:hover::before { transform: scale(1); opacity: 1; }
-        .nav-links a.active { color: #000; background: #ffffff; }
-        .nav-links a.active::before { display: none; }
-        .nav-links a:active { transform: scale(0.95); }
-
-        .avatar-menu { position: relative; flex: 0 0 auto; }
-        .avatar-btn {
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            padding: 0;
-            cursor: pointer;
-            overflow: hidden;
-            background: #111;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s, box-shadow 0.3s ease;
-        }
-        .avatar-btn:hover { border-color: rgba(255,255,255,0.4); transform: scale(1.05); }
-        .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-        .avatar-dropdown {
-            position: absolute;
-            top: calc(100% + 12px);
-            left: 0;
-            background: rgba(8, 8, 8, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            padding: 8px;
-            min-width: 170px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            backdrop-filter: blur(24px) saturate(1.4);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            transform-origin: top left;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: translateY(-16px) scale(0.75);
-            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.4s;
-        }
-        .avatar-dropdown.open { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
-        .avatar-dropdown a {
-            display: flex; align-items: center; justify-content: center;
-            background: white; color: black; text-decoration: none;
-            font-size: 0.85rem; font-weight: bold; padding: 10px 22px;
-            border-radius: 50px; transition: 0.3s ease;
-        }
-        .avatar-dropdown a:hover { transform: scale(1.05); background: #f0f0f0; }
-
-        .nav-search {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            color: white;
-            font-size: 0.85rem;
-            padding: 9px 18px;
-            outline: none;
-            transition: 0.3s;
-            min-width: 0;
-        }
-        .nav-search:focus { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08); }
-        .nav-search::placeholder { color: var(--text-dim); }
-
-        .brand-scroll {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            min-width: 0;
-            justify-content: flex-start;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            padding: 2px;
-        }
-        .brand-scroll::-webkit-scrollbar { display: none; height: 0; }
-
-        .brand-chip {
-            flex: 0 0 auto;
-            padding: 8px 18px;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-dim);
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-            font-size: 0.72rem;
-            letter-spacing: 0.8px;
-            white-space: nowrap;
-        }
-        .brand-chip.active { background: white; color: black; border-color: white; font-weight: bold; }
-        .brand-chip:hover:not(.active) { border-color: white; color: white; }
-
-        header { text-align: center; padding: 130px 20px 30px; position: relative; z-index: 2; }
-        h1 {
-            font-size: 3.2rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-            letter-spacing: -1.2px;
-            background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        header p { color: var(--text-dim); font-size: 1.05rem; }
-
-        .grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            padding: 20px 5% 100px;
-            max-width: 1300px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .card {
-            flex: 0 0 320px;
-            width: 320px;
-            background: rgba(8, 8, 8, 0.75);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 35px 28px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            min-height: 480px;
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s, box-shadow 0.4s;
-            backdrop-filter: blur(14px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255,255,255,0.25);
-            background: rgba(12, 12, 12, 0.85);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-        .card.hidden { display: none; }
-
-        .card-top { display: flex; flex-direction: column; align-items: center; width: 100%; }
-
-        .card img {
-            height: 190px;
-            width: auto;
-            max-width: 100%;
-            object-fit: contain;
-            margin: 18px 0;
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
-        }
-        .card:hover img { transform: scale(1.04) translateY(-4px); }
-
-        .device-name { font-size: 1.25rem; font-weight: 500; color: white; margin-bottom: 2px; }
-        .device-meta { color: var(--text-dim); font-size: 0.8rem; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0.85; }
-        .device-meta .codename { font-family: monospace; font-size: 0.85rem; color: #10b981; }
-        .device-meta .sep { opacity: 0.3; }
-
-        .status-badge {
-            display: inline-block;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 3px 10px;
-            border-radius: 20px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #10b981;
-            margin-bottom: 8px;
-        }
-
-        .card-actions { width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-
-        .btn-download, .btn-spec {
-            width: 100%;
-            padding: 13px;
-            text-decoration: none;
-            border-radius: 14px;
-            font-weight: bold;
-            font-size: 0.88rem;
-            cursor: pointer;
-            border: none;
-            transition: 0.3s ease;
-        }
-        .btn-download {
-            background: white;
-            color: black;
-        }
-        .btn-download:hover {
-            transform: scale(1.02);
-            background: #f0f0f0;
-            box-shadow: 0 4px 20px rgba(255,255,255,0.2);
-        }
-
-        .btn-spec {
-            background: transparent;
-            color: white;
-            border: 1px solid var(--border);
-        }
-        .btn-spec:hover {
-            border-color: white;
-            background: rgba(255,255,255,0.06);
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(14px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 20px;
-        }
-        .modal-overlay.active { display: flex; }
-        .modal-content {
-            background: rgba(12, 12, 12, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 35px 30px;
-            border-radius: 28px;
-            text-align: center;
-            max-width: 480px;
-            width: 100%;
-            backdrop-filter: blur(24px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            animation: modalFade 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        @keyframes modalFade {
-            0% { opacity: 0; transform: scale(0.92); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        .modal-content h2 { font-size: 1.6rem; margin-bottom: 12px; font-weight: 500; }
-        .modal-body { color: var(--text-dim); font-size: 0.88rem; text-align: left; margin-bottom: 16px; line-height: 1.65; max-height: 60vh; overflow-y: auto; }
-
-        .download-links-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .download-btn-pill {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 18px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            color: white;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: 0.25s ease;
-        }
-        .download-btn-pill:hover {
-            border-color: #10b981;
-            background: rgba(16, 185, 129, 0.08);
-            transform: translateX(4px);
-        }
-        .download-btn-pill b { color: #10b981; }
-
-        .btn-close {
-            padding: 11px 36px;
-            background: white; color: black;
-            border: none; border-radius: 50px;
-            font-weight: bold; cursor: pointer; margin-top: 15px;
-            transition: 0.3s ease;
-        }
-        .btn-close:hover { transform: scale(1.05); }
-
-        footer { text-align: center; padding: 60px; color: #555; border-top: 1px solid var(--border); font-size: 0.82rem; position: relative; z-index: 2; }
-
-        @media (max-width: 900px) {
-            nav { grid-template-columns: auto 1fr auto; }
-            .nav-search { display: none; }
-            h1 { font-size: 2.4rem; }
-        }
-        @media (max-width: 480px) {
-            .card { flex: 0 0 100%; max-width: 320px; }
-            header { padding-top: 110px; }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+    <div class="top-tricolor"></div>
 
-    <canvas id="particleCanvas"></canvas>
-    <div class="glare-bg"></div>
-    <div class="top-line"></div>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./index.html" class="brand-lockup" aria-label="GazaOS Home">
+                <img src="profile/gazaos-org-logo.svg" alt="GazaOS Organization Logo" class="org-logo-img">
+            </a>
 
-    <nav>
-        <div class="avatar-menu">
-            <button class="avatar-btn" id="avatarBtn" type="button" aria-label="Organization links">
-                <img src="profile/gazaos-logo.svg" alt="GazaOS Logo" width="200" height="200">
-            </button>
-            <div class="avatar-dropdown" id="avatarDropdown">
+            <nav class="nav-menu" aria-label="Primary">
+                <a href="./index.html">Overview</a>
+                <a href="./index.html#pillars">Features</a>
+                <a href="./devices.html" class="active">Downloads</a>
+                <a href="./team.html">Contributors</a>
+                <a href="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt" target="_blank" rel="noopener noreferrer">Changelog</a>
                 <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://github.com/GazaOS/OTA" target="_blank" rel="noopener noreferrer">OTA &amp; Changelogs</a>
-                <a href="https://t.me/GazaOS" target="_blank" rel="noopener noreferrer">Telegram</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme">☀️ Light</button>
             </div>
         </div>
-        <input type="text" id="searchInput" class="nav-search" placeholder="Search devices or codenames...">
-        <div class="brand-scroll" id="brandScroll">
-            <button class="brand-chip active" type="button" data-filter="all">All</button>
-            <button class="brand-chip" type="button" data-filter="Xiaomi">Xiaomi</button>
-            <button class="brand-chip" type="button" data-filter="Redmi">Redmi</button>
-            <button class="brand-chip" type="button" data-filter="Poco">POCO</button>
-        </div>
-        <div class="nav-links">
-            <a href="./index.html">About</a>
-            <a href="./devices.html" class="active">Devices</a>
-            <a href="./team.html">Team</a>
-        </div>
-    </nav>
-
-    <div class="nav-handle" id="navHandle" title="Pull down to show menu"></div>
-
-    <header>
-        <h1>Supported <span>Devices</span></h1>
-        <p>Official GazaOS 16.2 (Baklava) builds with HyperOS, ColorOS &amp; Hybrid UI presets.</p>
     </header>
 
-    <div class="grid" id="deviceGrid">
+    <main class="container">
+        <section class="page-banner">
+            <div class="eyebrow-pill">Official OTA Portal &bull; 16.2 (Baklava)</div>
+            <h1>Download GazaOS</h1>
+            <p>Select your device codename below to access signed Official builds, SHA-256 checksums, fastboot recovery boot images, and source changelogs.</p>
+        </section>
 
-        <!-- Xiaomi Redmi Note 12 5G (stone) -->
-        <div class="card" data-brand="Redmi Xiaomi" data-name="Redmi Note 12 5G" data-codename="stone sunstone">
-            <div class="card-top">
-                <span class="status-badge">Official &bull; Vanilla</span>
-                <span class="device-meta"><span class="maint-text">Masud Parvez</span><span class="sep">│</span><span class="codename">stone</span></span>
-                <h3 class="device-name">Redmi Note 12 5G</h3>
-                <img src="devices/stone/stone.png" alt="Redmi Note 12 5G" onerror="this.src='profile/gazaos-logo.svg'">
+        <div class="filter-toolbar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by device or codename (e.g. stone, moonstone, sunstone)...">
+            <div class="chip-bar" style="margin-bottom: 0;">
+                <button class="studio-chip active" type="button" data-filter="all">All</button>
+                <button class="studio-chip" type="button" data-filter="Xiaomi">Xiaomi</button>
+                <button class="studio-chip" type="button" data-filter="Redmi">Redmi</button>
+                <button class="studio-chip" type="button" data-filter="Poco">POCO</button>
             </div>
-            <div class="card-actions">
-                <button class="btn-download" type="button"
-                    data-ota="devices/stone/stone.json"
-                    data-name="Redmi Note 12 5G"
-                    data-codename="stone (sunstone)"
-                    data-maintainer="Masud Parvez (@Gtajisan)"
-                    data-version="16.2 Official Vanilla (Baklava)"
-                    data-builddate="2026-11-27"
-                    data-size="1.31 GB"
-                    data-md5="891a5a48b60b0b25ac370c04d3264e25"
-                    data-sha256="4b87c908f6444cc9831739647966b2c52a3cac219f037d23895a7ffbc681922b"
-                    data-filename="GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip"
-                    data-release="https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip"
-                    data-sha256file="https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip.sha256sum"
-                    data-releasepage="https://github.com/Gtajisan/stone/releases/tag/v16.2-20261127"
-                    data-changelog="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt">Download</button>
-                <button class="btn-spec" type="button"
-                    data-name="Redmi Note 12 5G (stone)"
-                    data-specs="Chipset: Qualcomm Snapdragon® 4 Gen 1 (SM4375)
-RAM: 4 / 6 / 8 GB LPDDR4X
-Storage: 128 / 256 GB UFS 2.2
-Display: 6.67&quot; AMOLED, 120Hz, FHD+ (2400x1080)
-Battery: 5000 mAh, 33W Fast Charging
+        </div>
+
+        <section class="device-grid" id="deviceGrid">
+            <!-- Redmi Note 12 5G (stone / sunstone) -->
+            <article class="device-card" data-brand="Redmi Xiaomi" data-name="Redmi Note 12 5G" data-codename="stone sunstone">
+                <div>
+                    <div class="device-top">
+                        <span class="badge-official">OFFICIAL &bull; VANILLA</span>
+                        <code>stone</code>
+                    </div>
+                    <h2 style="margin-top: 12px; font-size: 1.35rem;">Redmi Note 12 5G</h2>
+                    <div class="device-thumb">
+                        <img src="devices/stone/stone.png" alt="Redmi Note 12 5G" onerror="this.src='profile/gazaos-logo.svg'">
+                    </div>
+                    <div class="device-meta-table">
+                        <div><span>Maintainer</span><strong>Masud Parvez</strong></div>
+                        <div><span>Latest Build</span><strong>2026-11-27 (v16.2)</strong></div>
+                        <div><span>Size</span><strong>1.31 GB</strong></div>
+                    </div>
+                </div>
+                <div class="device-actions">
+                    <button class="btn btn-primary btn-download" type="button"
+                        data-ota="devices/stone/stone.json"
+                        data-name="Redmi Note 12 5G"
+                        data-codename="stone (sunstone)"
+                        data-maintainer="Masud Parvez (@Gtajisan)"
+                        data-version="16.2 OFFICIAL VANILLA (Baklava)"
+                        data-builddate="2026-11-27"
+                        data-size="1.31 GB"
+                        data-md5="891a5a48b60b0b25ac370c04d3264e25"
+                        data-sha256="4b87c908f6444cc9831739647966b2c52a3cac219f037d23895a7ffbc681922b"
+                        data-filename="GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip"
+                        data-release="https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip"
+                        data-sha256file="https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip.sha256sum"
+                        data-releasepage="https://github.com/Gtajisan/stone/releases/tag/v16.2-20261127"
+                        data-changelog="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt">Download</button>
+                    <button class="btn btn-secondary btn-spec" type="button"
+                        data-name="Redmi Note 12 5G (stone)"
+                        data-specs="Chipset: Qualcomm Snapdragon 4 Gen 1 (SM4375)
+RAM / Storage: 4/6/8 GB · 128/256 GB UFS 2.2
+Display: 6.67&quot; AMOLED · 120Hz · FHD+ (2400x1080)
+Battery: 5000 mAh · 33W Fast Charge
 UI: HyperOS Control Center QS + 1-Tap AOSP Look Lite
 Audio: Dolby Atmos + ViPER4Android FX
-Firewall: Datura Privacy Shield">Specifications</button>
-            </div>
-        </div>
+Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
+                </div>
+            </article>
 
-        <!-- POCO X5 5G (moonstone) -->
-        <div class="card" data-brand="Poco Xiaomi" data-name="POCO X5 5G" data-codename="stone moonstone">
-            <div class="card-top">
-                <span class="status-badge">Official &bull; Vanilla</span>
-                <span class="device-meta"><span class="maint-text">Masud Parvez</span><span class="sep">│</span><span class="codename">moonstone</span></span>
-                <h3 class="device-name">POCO X5 5G</h3>
-                <img src="devices/stone/stone.png" alt="POCO X5 5G" onerror="this.src='profile/gazaos-logo.svg'">
-            </div>
-            <div class="card-actions">
-                <button class="btn-download" type="button"
-                    data-ota="devices/stone/stone.json"
-                    data-name="POCO X5 5G"
-                    data-codename="stone (moonstone)"
-                    data-maintainer="Masud Parvez (@Gtajisan)"
-                    data-version="16.2 Official Vanilla (Baklava)"
-                    data-builddate="2026-11-27"
-                    data-size="1.31 GB"
-                    data-md5="891a5a48b60b0b25ac370c04d3264e25"
-                    data-sha256="4b87c908f6444cc9831739647966b2c52a3cac219f037d23895a7ffbc681922b"
-                    data-filename="GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip"
-                    data-release="https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip"
-                    data-sha256file="https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip.sha256sum"
-                    data-releasepage="https://github.com/Gtajisan/stone/releases/tag/v16.2-20261127"
-                    data-changelog="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt">Download</button>
-                <button class="btn-spec" type="button"
-                    data-name="POCO X5 5G (moonstone)"
-                    data-specs="Chipset: Qualcomm Snapdragon® 695 5G (SM6375)
-RAM: 6 / 8 GB LPDDR4X
-Storage: 128 / 256 GB UFS 2.2
-Display: 6.67&quot; AMOLED, 120Hz, FHD+ (2400x1080)
-Battery: 5000 mAh, 33W Fast Charging
+            <!-- POCO X5 5G (stone / moonstone) -->
+            <article class="device-card" data-brand="Poco Xiaomi" data-name="POCO X5 5G" data-codename="stone moonstone">
+                <div>
+                    <div class="device-top">
+                        <span class="badge-official">OFFICIAL &bull; VANILLA</span>
+                        <code>moonstone</code>
+                    </div>
+                    <h2 style="margin-top: 12px; font-size: 1.35rem;">POCO X5 5G</h2>
+                    <div class="device-thumb">
+                        <img src="devices/stone/stone.png" alt="POCO X5 5G" onerror="this.src='profile/gazaos-logo.svg'">
+                    </div>
+                    <div class="device-meta-table">
+                        <div><span>Maintainer</span><strong>Masud Parvez</strong></div>
+                        <div><span>Latest Build</span><strong>2026-11-27 (v16.2)</strong></div>
+                        <div><span>Size</span><strong>1.31 GB</strong></div>
+                    </div>
+                </div>
+                <div class="device-actions">
+                    <button class="btn btn-primary btn-download" type="button"
+                        data-ota="devices/stone/stone.json"
+                        data-name="POCO X5 5G"
+                        data-codename="stone (moonstone)"
+                        data-maintainer="Masud Parvez (@Gtajisan)"
+                        data-version="16.2 OFFICIAL VANILLA (Baklava)"
+                        data-builddate="2026-11-27"
+                        data-size="1.31 GB"
+                        data-md5="891a5a48b60b0b25ac370c04d3264e25"
+                        data-sha256="4b87c908f6444cc9831739647966b2c52a3cac219f037d23895a7ffbc681922b"
+                        data-filename="GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip"
+                        data-release="https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip"
+                        data-sha256file="https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip.sha256sum"
+                        data-releasepage="https://github.com/Gtajisan/stone/releases/tag/v16.2-20261127"
+                        data-changelog="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt">Download</button>
+                    <button class="btn btn-secondary btn-spec" type="button"
+                        data-name="POCO X5 5G (moonstone)"
+                        data-specs="Chipset: Qualcomm Snapdragon 695 5G (SM6375)
+RAM / Storage: 6/8 GB · 128/256 GB UFS 2.2
+Display: 6.67&quot; AMOLED · 120Hz · FHD+ (2400x1080)
+Battery: 5000 mAh · 33W Fast Charge
 UI: HyperOS Control Center QS + 1-Tap AOSP Look Lite
 Audio: Dolby Atmos + ViPER4Android FX
-Firewall: Datura Privacy Shield">Specifications</button>
-            </div>
-        </div>
+Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
+                </div>
+            </article>
 
-        <!-- Apply to maintain card -->
-        <div class="card" data-brand="all" data-name="Your Device" data-codename="maintainer">
-            <div class="card-top">
-                <span class="status-badge" style="color: #60a5fa; border-color: rgba(96, 165, 250, 0.3); background: rgba(96, 165, 250, 0.1);">Join GazaOS</span>
-                <span class="device-meta"><span class="maint-text">Community</span><span class="sep">│</span><span class="codename">open</span></span>
-                <h3 class="device-name">Bring GazaOS to Your Device</h3>
-                <div style="font-size: 3.5rem; margin: 30px 0;">📱</div>
-            </div>
-            <div class="card-actions">
-                <a href="https://github.com/GazaOS/.github/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn-download" style="text-align: center; display: block;">Maintainer Guide</a>
-                <a href="https://github.com/GazaOS/.github/issues/new?template=device_maintainer.yml" target="_blank" rel="noopener noreferrer" class="btn-spec" style="text-align: center; display: block;">Apply on GitHub</a>
-            </div>
-        </div>
+            <!-- Maintainer Card -->
+            <article class="device-card" data-brand="all" data-name="Maintain a Device" data-codename="open">
+                <div>
+                    <div class="device-top">
+                        <span class="badge-official">OPEN PROGRAM</span>
+                        <code>bringup</code>
+                    </div>
+                    <h2 style="margin-top: 12px; font-size: 1.35rem;">Maintain GazaOS</h2>
+                    <div class="device-thumb">
+                        <img src="profile/gazaos-logo.svg" alt="GazaOS Emblem" style="width: 120px; height: 120px;">
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.92rem;">
+                        Port GazaOS 16.2 to your device cleanly using <code>gazaos.dependencies</code> and automated OTA metadata.
+                    </p>
+                </div>
+                <div class="device-actions">
+                    <a href="https://github.com/GazaOS/.github/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Guide</a>
+                    <a href="https://github.com/GazaOS/.github/issues/new?template=device_maintainer.yml" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Apply</a>
+                </div>
+            </article>
+        </section>
+    </main>
 
-    </div>
-
-    <!-- Modal Dialog -->
     <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="modal-content">
-            <h2 id="modalTitle"></h2>
-            <div class="modal-body" id="modalBody"></div>
-            <button class="btn-close" id="btnClose" type="button">Close</button>
+        <div class="modal-box">
+            <div class="modal-head">
+                <h2 id="modalTitle" style="font-size: 1.3rem;">Details</h2>
+                <button class="icon-btn" id="btnClose" type="button">✕ Close</button>
+            </div>
+            <div id="modalBody"></div>
         </div>
     </div>
 
-    <footer><p>© 2026 GazaOS Organization. Released under Apache 2.0.<br>❤️ Free Palestine 🇵🇸</p></footer>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <span>&copy; 2026 GazaOS Organization. Licensed under Apache 2.0.</span>
+                <span>❤️ Free Palestine 🇵🇸</span>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        const htmlEl = document.documentElement;
+        const themeBtn = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('gazaos-theme') || 'dark';
+        htmlEl.setAttribute('data-theme', savedTheme);
+        function syncThemeLabel() {
+            themeBtn.textContent = htmlEl.getAttribute('data-theme') === 'light' ? '🌙 Dark' : '☀️ Light';
         }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.6;
-                this.speedX = (Math.random() - 0.5) * 0.35;
-                this.speedY = (Math.random() - 0.5) * 0.35;
-                this.opacity = Math.random() * 0.5 + 0.15;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.y < 0) this.y = canvas.height;
-                if (this.y > canvas.height) this.y = 0;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
-            for (let i = 0; i < count; i++) particles.push(new Particle());
-        }
-        initParticles();
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx*dx + dy*dy);
-                    if (dist < 110) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.06 * (1 - dist/110)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        const navEl = document.querySelector('nav');
-        const navHandle = document.getElementById('navHandle');
-        navEl.addEventListener('animationend', () => {
-            navEl.style.animation = 'none';
-        }, { once: true });
-
-        function hideNav() {
-            navEl.classList.add('nav-hidden');
-            navHandle.classList.add('visible');
-        }
-        function showNav() {
-            navEl.classList.remove('nav-hidden');
-            navHandle.classList.remove('visible');
-        }
-        function makeDraggable(el, { onHide, onShow, direction }) {
-            let dragging = false;
-            let startY = 0;
-            function onMove(e) {
-                if (!dragging) return;
-                const deltaY = e.clientY - startY;
-                if (direction === 'hide' && deltaY < 0) {
-                    navEl.style.transform = `translateY(${deltaY}px)`;
-                } else if (direction === 'show' && deltaY > 0) {
-                    navEl.style.transform = `translateY(${-150 + Math.min(deltaY, 150) / 150 * 150}%)`;
-                }
-            }
-            function onUp(e) {
-                if (!dragging) return;
-                dragging = false;
-                navEl.style.transition = '';
-                navEl.style.transform = '';
-                const deltaY = e.clientY - startY;
-                if (direction === 'hide' && deltaY < -25) onHide();
-                if (direction === 'show' && deltaY > 25) onShow();
-                window.removeEventListener('pointermove', onMove);
-                window.removeEventListener('pointerup', onUp);
-            }
-            el.addEventListener('pointerdown', (e) => {
-                if (e.target.closest('input, button, a')) return;
-                dragging = true;
-                startY = e.clientY;
-                navEl.style.transition = 'none';
-                window.addEventListener('pointermove', onMove);
-                window.addEventListener('pointerup', onUp);
-            });
-        }
-        makeDraggable(navEl, { onHide: hideNav, direction: 'hide' });
-        makeDraggable(navHandle, { onShow: showNav, direction: 'show' });
-        navHandle.addEventListener('click', showNav);
-
-        const avatarBtn = document.getElementById('avatarBtn');
-        const avatarDropdown = document.getElementById('avatarDropdown');
-        avatarBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            avatarDropdown.classList.toggle('open');
-        });
-        document.addEventListener('click', (e) => {
-            if (!avatarDropdown.contains(e.target) && e.target !== avatarBtn) {
-                avatarDropdown.classList.remove('open');
-            }
+        syncThemeLabel();
+        themeBtn.addEventListener('click', () => {
+            const next = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            htmlEl.setAttribute('data-theme', next);
+            localStorage.setItem('gazaos-theme', next);
+            syncThemeLabel();
         });
 
-        // Search & Filtering
         const searchInput = document.getElementById('searchInput');
-        const brandChips = document.querySelectorAll('.brand-chip');
-        const cards = document.querySelectorAll('.card');
+        const filterChips = document.querySelectorAll('[data-filter]');
+        const cards = document.querySelectorAll('.device-card');
 
-        function filterDevices() {
-            const query = searchInput.value.toLowerCase().trim();
-            const activeChip = document.querySelector('.brand-chip.active');
-            const activeBrand = activeChip ? activeChip.getAttribute('data-filter') : 'all';
-
-            cards.forEach(card => {
-                const brand = card.getAttribute('data-brand') || '';
-                const name = (card.getAttribute('data-name') || '').toLowerCase();
-                const codename = (card.getAttribute('data-codename') || '').toLowerCase();
-
-                const matchesBrand = activeBrand === 'all' || brand === 'all' || brand.toLowerCase().includes(activeBrand.toLowerCase());
-                const matchesQuery = query === '' || name.includes(query) || codename.includes(query) || brand.toLowerCase().includes(query);
-
-                card.classList.toggle('hidden', !(matchesBrand && matchesQuery));
+        function applyFilters() {
+            const q = searchInput.value.trim().toLowerCase();
+            const brand = document.querySelector('[data-filter].active').getAttribute('data-filter').toLowerCase();
+            cards.forEach(c => {
+                const cb = (c.getAttribute('data-brand') || '').toLowerCase();
+                const cn = (c.getAttribute('data-name') || '').toLowerCase();
+                const cc = (c.getAttribute('data-codename') || '').toLowerCase();
+                const okBrand = brand === 'all' || cb === 'all' || cb.includes(brand);
+                const okQuery = !q || cn.includes(q) || cc.includes(q) || cb.includes(q);
+                c.classList.toggle('hidden', !(okBrand && okQuery));
             });
         }
+        searchInput.addEventListener('input', applyFilters);
+        filterChips.forEach(ch => ch.addEventListener('click', () => {
+            filterChips.forEach(x => x.classList.remove('active'));
+            ch.classList.add('active');
+            applyFilters();
+        }));
 
-        searchInput.addEventListener('input', filterDevices);
-        brandChips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                brandChips.forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                filterDevices();
-            });
-        });
+        function formatBytes(b) { return b ? (Number(b) / (1024 ** 3)).toFixed(2) + ' GB' : ''; }
+        function formatDate(ts) { return ts ? new Date(Number(ts) * 1000).toISOString().slice(0, 10) : ''; }
 
-        // Hydrate live OTA metadata from JSON manifests when served over HTTP(S)
-        function formatBytes(bytes) {
-            if (!bytes || Number.isNaN(Number(bytes))) return '';
-            return (Number(bytes) / (1024 ** 3)).toFixed(2) + ' GB';
-        }
-        function formatDate(ts) {
-            if (!ts || Number.isNaN(Number(ts))) return '';
-            return new Date(Number(ts) * 1000).toISOString().slice(0, 10);
-        }
-        const otaButtons = Array.from(document.querySelectorAll('button.btn-download[data-ota]'));
         const otaCache = new Map();
-        otaButtons.forEach(btn => {
+        document.querySelectorAll('.btn-download[data-ota]').forEach(btn => {
             const url = btn.getAttribute('data-ota');
-            if (!url) return;
             if (!otaCache.has(url)) {
                 otaCache.set(url, fetch(url).then(r => (r.ok ? r.json() : null)).catch(() => null));
             }
             otaCache.get(url).then(data => {
-                const entry = data && Array.isArray(data.response) ? data.response[0] : null;
-                if (!entry) return;
-                if (entry.version) {
-                    const typeTag = entry.buildtype ? ` ${entry.buildtype}` : '';
-                    const editionTag = entry.edition ? ` ${entry.edition}` : '';
-                    btn.setAttribute('data-version', `${entry.version}${typeTag}${editionTag} (Baklava)`);
-                }
-                if (entry.maintainer) btn.setAttribute('data-maintainer', entry.maintainer);
-                if (entry.download) btn.setAttribute('data-release', entry.download);
-                if (entry.changelog) btn.setAttribute('data-changelog', entry.changelog);
-                if (entry.filename) btn.setAttribute('data-filename', entry.filename);
-                if (entry.md5) btn.setAttribute('data-md5', entry.md5);
-                if (entry.sha256) btn.setAttribute('data-sha256', entry.sha256);
-                if (entry.size) btn.setAttribute('data-size', formatBytes(entry.size));
-                if (entry.timestamp) btn.setAttribute('data-builddate', formatDate(entry.timestamp));
+                const e = data && Array.isArray(data.response) ? data.response[0] : null;
+                if (!e) return;
+                if (e.version) btn.setAttribute('data-version', `${e.version} ${e.buildtype || ''} ${e.edition || ''} (Baklava)`.trim());
+                if (e.maintainer) btn.setAttribute('data-maintainer', e.maintainer);
+                if (e.download) btn.setAttribute('data-release', e.download);
+                if (e.changelog) btn.setAttribute('data-changelog', e.changelog);
+                if (e.filename) btn.setAttribute('data-filename', e.filename);
+                if (e.md5) btn.setAttribute('data-md5', e.md5);
+                if (e.sha256) btn.setAttribute('data-sha256', e.sha256);
+                if (e.size) btn.setAttribute('data-size', formatBytes(e.size));
+                if (e.timestamp) btn.setAttribute('data-builddate', formatDate(e.timestamp));
             });
         });
 
-        // Modals
         const modalOverlay = document.getElementById('modalOverlay');
         const modalTitle = document.getElementById('modalTitle');
         const modalBody = document.getElementById('modalBody');
-        const btnClose = document.getElementById('btnClose');
-
-        function openModal(title, htmlContent) {
-            modalTitle.textContent = title;
-            modalBody.innerHTML = htmlContent;
+        function openModal(t, h) {
+            modalTitle.textContent = t;
+            modalBody.innerHTML = h;
             modalOverlay.classList.add('active');
         }
-        function closeModal() {
-            modalOverlay.classList.remove('active');
-        }
+        function closeModal() { modalOverlay.classList.remove('active'); }
+        document.getElementById('btnClose').addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-        btnClose.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-                closeModal();
-            }
-        });
-
-        document.querySelectorAll('button.btn-spec').forEach(btn => {
+        document.querySelectorAll('.btn-spec').forEach(btn => {
             btn.addEventListener('click', () => {
-                const name = btn.getAttribute('data-name');
-                const specs = btn.getAttribute('data-specs');
-                if (specs) {
-                    const formatted = specs.split('\n').map(line => `<div>&bull; ${line}</div>`).join('');
-                    openModal(name, formatted);
-                }
+                const lines = (btn.getAttribute('data-specs') || '').split('\n').map(l => `<li style="margin-bottom:8px;">${l}</li>`).join('');
+                openModal(btn.getAttribute('data-name'), `<ul style="padding-left:18px; color:var(--text-secondary);">${lines}</ul>`);
             });
         });
 
-        document.querySelectorAll('button.btn-download').forEach(btn => {
+        document.querySelectorAll('.btn-download').forEach(btn => {
             btn.addEventListener('click', () => {
                 const name = btn.getAttribute('data-name');
                 const codename = btn.getAttribute('data-codename');
-                const version = btn.getAttribute('data-version');
                 const maintainer = btn.getAttribute('data-maintainer');
-                const size = btn.getAttribute('data-size');
+                const version = btn.getAttribute('data-version');
+                const filename = btn.getAttribute('data-filename');
                 const date = btn.getAttribute('data-builddate');
+                const size = btn.getAttribute('data-size');
                 const md5 = btn.getAttribute('data-md5');
                 const sha256 = btn.getAttribute('data-sha256');
-                const filename = btn.getAttribute('data-filename');
                 const release = btn.getAttribute('data-release');
                 const sha256file = btn.getAttribute('data-sha256file');
                 const releasepage = btn.getAttribute('data-releasepage');
                 const changelog = btn.getAttribute('data-changelog');
 
-                if (release) {
-                    const content = `
-                        <div style="font-size: 0.95rem; margin-bottom: 12px;"><b>Device:</b> ${name} (${codename})</div>
-                        <div style="font-size: 0.85rem; color: #a3a3a3;"><b>Maintainer:</b> ${maintainer}</div>
-                        <div style="font-size: 0.85rem; color: #a3a3a3;"><b>Version:</b> GazaOS ${version}</div>
-                        <div style="font-size: 0.85rem; color: #a3a3a3;"><b>Package:</b> <code>${filename}</code></div>
-                        <div style="font-size: 0.85rem; color: #a3a3a3;"><b>Date:</b> ${date} &bull; <b>Size:</b> ${size}</div>
-                        <div style="font-size: 0.78rem; color: #737373; margin-top: 8px; word-break: break-all;"><b>MD5:</b> <code>${md5}</code></div>
-                        ${sha256 ? `<div style="font-size: 0.78rem; color: #737373; margin-top: 4px; word-break: break-all;"><b>SHA-256:</b> <code>${sha256}</code></div>` : ''}
-
-                        <div class="download-links-list">
-                            <a href="${release}" class="download-btn-pill" target="_blank" rel="noopener noreferrer">
-                                <span>🚀 <b>GitHub Release ZIP (Direct)</b></span>
-                                <span>⬇️</span>
-                            </a>
-                            ${sha256file ? `<a href="${sha256file}" class="download-btn-pill" target="_blank" rel="noopener noreferrer"><span>🔐 <b>SHA-256 Checksum (.sha256sum)</b></span><span>⬇️</span></a>` : ''}
-                            ${releasepage ? `<a href="${releasepage}" class="download-btn-pill" target="_blank" rel="noopener noreferrer"><span>📦 <b>Release Notes &amp; Boot Images</b></span><span>↗</span></a>` : ''}
-                            ${changelog ? `<a href="${changelog}" class="download-btn-pill" target="_blank" rel="noopener noreferrer"><span>📜 <b>Device &amp; Source Changelog</b></span><span>↗</span></a>` : ''}
-                        </div>
-                    `;
-                    openModal(`Download ${name}`, content);
-                }
+                const html = `
+                    <div style="display:grid; gap:6px; font-size:0.9rem; color:var(--text-secondary);">
+                        <div><strong style="color:var(--text);">Device:</strong> ${name} (${codename})</div>
+                        <div><strong style="color:var(--text);">Maintainer:</strong> ${maintainer}</div>
+                        <div><strong style="color:var(--text);">Build:</strong> GazaOS ${version}</div>
+                        <div><strong style="color:var(--text);">Date / Size:</strong> ${date} &bull; ${size}</div>
+                        <div style="word-break:break-all;"><strong style="color:var(--text);">File:</strong> <code>${filename}</code></div>
+                        <div style="word-break:break-all; font-size:0.8rem;"><strong style="color:var(--text);">MD5:</strong> <code>${md5}</code></div>
+                        <div style="word-break:break-all; font-size:0.8rem;"><strong style="color:var(--text);">SHA-256:</strong> <code>${sha256}</code></div>
+                    </div>
+                    <div class="modal-links">
+                        <a href="${release}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>🚀 Direct ROM ZIP (GitHub Release)</span><span>⬇️</span></a>
+                        ${sha256file ? `<a href="${sha256file}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>🔐 SHA-256 Checksum File</span><span>⬇️</span></a>` : ''}
+                        ${releasepage ? `<a href="${releasepage}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>📦 Boot / Recovery Images &amp; Notes</span><span>↗</span></a>` : ''}
+                        ${changelog ? `<a href="${changelog}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>📜 Device &amp; Source Changelog</span><span>↗</span></a>` : ''}
+                    </div>`;
+                openModal(`Download ${name}`, html);
             });
         });
     </script>
