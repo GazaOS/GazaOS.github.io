@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>GazaOS — Hybrid Android 16.2, Freedom &amp; Craft</title>
-    <meta name="description" content="GazaOS is a hybrid Android 16.2 custom ROM combining Lunaris-AOSP, crDroid, and LineageOS with HyperOS, ColorOS, and GazaOS Hybrid UI presets, Modular Quick Settings, and Palestine solidarity.">
+    <title>GazaOS — HyperOS-Hybrid Android 16.2, Freedom &amp; Craft</title>
+    <meta name="description" content="GazaOS is a lightweight HyperOS-Hybrid Android 16.2 custom ROM combining Lunaris-AOSP, crDroid, and LineageOS with full HyperOS Control Center QS, 1-tap AOSP Look Lite, studio audio, and Palestine solidarity.">
     <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
-    <link rel="icon" type="image/png" href="profile/avatar.png">
+    <link rel="icon" type="image/svg+xml" href="profile/gazaos-logo.svg">
     <style>
         :root {
             --bg: #000000;
@@ -291,6 +291,22 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         .flag-pill .flag-icon { font-size: 1.1rem; }
+
+        .hero-emblem {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 22px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 12px 32px rgba(0, 122, 61, 0.38));
+        }
+        .hero-emblem img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
 
         h1.hero-title {
             font-size: 4.2rem;
@@ -1047,6 +1063,7 @@
             }
         }
         @media (max-width: 768px) {
+            .hero-emblem { width: 72px; height: 72px; margin-bottom: 16px; }
             h1.hero-title { font-size: 2.8rem; }
             p.hero-tagline { font-size: 1.02rem; }
             .hero { margin-top: 130px; }
@@ -1065,10 +1082,11 @@
         <div class="nav-left">
             <div class="avatar-menu">
                 <button class="avatar-btn" id="avatarBtn" type="button" aria-label="Organization links">
-                    <img src="profile/avatar.png" alt="GazaOS Logo" width="200" height="200">
+                    <img src="profile/gazaos-logo.svg" alt="GazaOS Logo" width="200" height="200">
                 </button>
                 <div class="avatar-dropdown" id="avatarDropdown">
                     <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://github.com/GazaOS/OTA" target="_blank" rel="noopener noreferrer">OTA &amp; Changelogs</a>
                     <a href="https://t.me/GazaOS" target="_blank" rel="noopener noreferrer">Telegram</a>
                 </div>
             </div>
@@ -1084,6 +1102,9 @@
     <div class="nav-handle" id="navHandle" title="Pull down to show menu"></div>
 
     <section class="hero" id="home">
+        <div class="hero-emblem">
+            <img src="profile/gazaos-logo.svg" alt="GazaOS Crest Logo" width="88" height="88">
+        </div>
         <div class="flag-pill">
             <span class="flag-icon">🇵🇸</span>
             <span>Stand for Justice &bull; Free Palestine</span>
@@ -1091,18 +1112,18 @@
 
         <h1 class="hero-title">GazaOS</h1>
         <p class="hero-tagline">
-            Hybrid Android 16.2 (Baklava) built from Lunaris-AOSP, crDroid, and LineageOS—pairing a customizable HyperOS, ColorOS &amp; GazaOS Hybrid UI engine with studio audio, Datura privacy, and zero bloat.
+            Lightweight HyperOS-Hybrid Android 16.2 (Baklava) built on Lunaris-AOSP, crDroid, and LineageOS—pairing a full HyperOS Control Center QS with a 1-tap AOSP Look Lite mode, studio audio, Datura privacy, and zero bloat.
         </p>
 
         <div class="hero-actions">
-            <a href="./devices.html" class="btn-primary">Download for Devices</a>
+            <a href="./devices.html" class="btn-primary">Download Official Builds</a>
             <a href="#ui-studio" class="btn-secondary">Explore Hybrid UI</a>
-            <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer" class="btn-secondary">GitHub Org</a>
+            <a href="https://github.com/GazaOS/android" target="_blank" rel="noopener noreferrer" class="btn-secondary">Source on GitHub</a>
         </div>
 
         <div class="badges-bar">
             <div class="base-badge"><span class="dot"></span>Android: <b>16.2 (Baklava)</b></div>
-            <div class="base-badge">UI Presets: <b>Hybrid &bull; HyperOS &bull; ColorOS &bull; AOSP</b></div>
+            <div class="base-badge">QS Engine: <b>HyperOS Control Center &bull; AOSP Lite</b></div>
             <div class="base-badge">Base: <b>Lunaris + crDroid + LineageOS</b></div>
         </div>
     </section>
@@ -1326,8 +1347,8 @@
         </div>
         <div class="feature-card">
             <div class="feature-icon">🎛️</div>
-            <h3>HyperOS-Hybrid Quick Settings</h3>
-            <p>Mist Modular QS with HyperOS-style rounded-square tiles &amp; sliders, MIUI corner-spread spring animations, ColorOS tile backgrounds, and cached dynamic blur—keeping AOSP's smooth flow.</p>
+            <h3>HyperOS Control Center &amp; AOSP Lite</h3>
+            <p>Full HyperOS Control Center defaults (split shade, horizontal swipe, rounded-square sliders &amp; blurred vertical volume dialog) with a 1-tap <strong>AOSP Look Lite</strong> preset toggle inside Gaza Lab.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🖼️</div>

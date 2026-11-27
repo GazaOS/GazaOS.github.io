@@ -1,18 +1,21 @@
 {
   "response": [
     {
-      "maintainer": "@Parvez52",
+      "maintainer": "Masud Parvez",
       "currently_maintained": true,
       "oem": "Xiaomi",
-      "device": "stone",
-      "filename": "GazaOSAndroid-16.2-20261124-stone-v16.2.zip",
-      "download": "https://github.com/GazaOS/releases/releases/download/261124/GazaOSAndroid-16.2-20261124-stone-v16.2.zip",
-      "timestamp": 1795535660,
-      "md5": "a5f3ada07924f3e45433da4f1d17cbcb",
-      "sha256": "2bfd023be563b3a6f909d95bcbf508968d9d3127377d833f507cf448ec17de3d",
-      "size": 1662962675,
+      "device": "Redmi Note 12 5G / POCO X5 5G",
+      "codename": "stone",
+      "filename": "GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip",
+      "download": "https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip",
+      "changelog": "https://raw.githubusercontent.com/GazaOS/OTA/refs/heads/16.2/changelogs/stone.txt",
+      "timestamp": 1795781529,
+      "md5": "891a5a48b60b0b25ac370c04d3264e25",
+      "sha256": "4b87c908f6444cc9831739647966b2c52a3cac219f037d23895a7ffbc681922b",
+      "size": 1401335266,
       "version": "16.2",
-      "buildtype": "Community"
+      "buildtype": "OFFICIAL",
+      "edition": "VANILLA"
     }
   ]
 }

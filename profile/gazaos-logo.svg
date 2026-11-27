@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108" role="img" aria-label="GazaOS Crest Logo">
+  <defs>
+    <radialGradient id="gazaBg" cx="32%" cy="28%" r="75%">
+      <stop offset="0%" stop-color="#11261E"/>
+      <stop offset="100%" stop-color="#070C0A"/>
+    </radialGradient>
+    <linearGradient id="gazaRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#149C5A" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#007A3D" stop-opacity="0.25"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="100" height="100" rx="28" fill="url(#gazaBg)" stroke="url(#gazaRing)" stroke-width="2"/>
+  <!-- GazaOS geometric G shield arc -->
+  <path fill="#007A3D" d="M54,18C34.12,18 18,34.12 18,54C18,73.88 34.12,90 54,90C70.76,90 84.82,78.52 88.76,63L89.76,58.5L56.25,58.5L56.25,67.5L76.72,67.5C72.45,75.49 63.9,80.78 54,80.78C39.15,80.78 27.22,68.85 27.22,54C27.22,39.15 39.15,27.22 54,27.22C63.11,27.22 71.21,31.72 76.05,38.7L83.81,33.3C77.18,23.96 66.26,18 54,18Z"/>
+  <!-- GazaOS faceted nexus core -->
+  <path fill="#149C5A" d="M54,40.5L64.12,50.62L54,60.75L43.88,50.62Z"/>
+  <!-- GazaOS spark accent -->
+  <circle cx="79.88" cy="42.75" r="3.94" fill="#CE1126"/>
+</svg>
