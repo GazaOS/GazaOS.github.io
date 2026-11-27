@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GazaOS — HyperOS-Hybrid Android 16.2 Operating System</title>
-    <meta name="description" content="A lightweight, open-source Android 16.2 operating system combining LineageOS, Lunaris-AOSP, and crDroid with full HyperOS Control Center QS, 1-tap AOSP Look Lite, Datura firewall, and Palestine solidarity.">
+    <title>GazaOS — Android 16.2</title>
+    <meta name="description" content="GazaOS is a free and open-source Android 16.2 distribution based on Lunaris-AOSP, crDroid, and LineageOS.">
     <link rel="icon" type="image/svg+xml" href="profile/gazaos-logo.svg">
     <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -14,20 +14,20 @@
     <header class="site-header">
         <div class="container header-inner">
             <a href="./index.html" class="brand-lockup" aria-label="GazaOS Home">
-                <img src="profile/gazaos-org-logo.svg" alt="GazaOS Organization Logo" class="org-logo-img">
+                <img src="profile/gazaos-org-logo.svg" alt="GazaOS" class="org-logo-img">
             </a>
 
             <nav class="nav-menu" aria-label="Primary">
                 <a href="./index.html" class="active">Overview</a>
-                <a href="#pillars">Features</a>
+                <a href="#features">Features</a>
                 <a href="./devices.html">Downloads</a>
                 <a href="./team.html">Contributors</a>
-                <a href="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt" target="_blank" rel="noopener noreferrer">Changelog</a>
+                <a href="https://github.com/GazaOS/changelogs" target="_blank" rel="noopener noreferrer">Changelog</a>
                 <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer">GitHub</a>
             </nav>
 
             <div class="header-actions">
-                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme">☀️ Light</button>
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme">Theme</button>
             </div>
         </div>
     </header>
@@ -36,55 +36,46 @@
         <section class="hero-section">
             <div class="container hero-grid">
                 <div>
-                    <div class="eyebrow-pill">🇵🇸 Free Palestine &bull; Open Source Android 16.2</div>
-                    <h1 class="hero-title">A lightweight, open operating system crafted for daily speed.</h1>
+                    <div class="eyebrow-pill">Android 16.2 &bull; Free Palestine</div>
+                    <h1 class="hero-title">A free and open-source operating system for mobile devices.</h1>
                     <p class="hero-subtitle">
-                        GazaOS fuses upstream stability from <strong>LineageOS</strong>, <strong>Lunaris-AOSP</strong>, and <strong>crDroid</strong> with a full <strong>HyperOS Control Center QS</strong>, a one-tap <strong>AOSP Look Lite</strong> preset inside Gaza Lab, studio audio DSP, and Datura privacy.
+                        GazaOS builds on <strong>LineageOS</strong>, <strong>Lunaris-AOSP</strong>, and <strong>crDroid</strong>, combining modular HyperOS Control Center Quick Settings and an AOSP Look Lite preset in a clean, device-agnostic distribution.
                     </p>
                     <div class="cta-row">
-                        <a href="./devices.html" class="btn btn-primary">Get GazaOS 16.2</a>
-                        <a href="https://github.com/Gtajisan/stone/releases/tag/v16.2-20261127" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Latest Official Stone ZIP</a>
-                        <a href="https://github.com/GazaOS/android" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Manifest Source</a>
+                        <a href="./devices.html" class="btn btn-primary">Get GazaOS</a>
+                        <a href="https://github.com/GazaOS/android" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Source Manifest</a>
+                        <a href="https://github.com/GazaOS/changelogs" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Changelog</a>
                     </div>
                     <div class="hero-meta-strip">
-                        <span>Base: <strong>Android 16.2 (BP4A)</strong></span>
-                        <span>Edition: <strong>Vanilla Lite (1.31 GB)</strong></span>
-                        <span>Latest Build: <strong>2026-11-27 Official</strong></span>
+                        <span>Version: <strong>16.2 (BP4A)</strong></span>
+                        <span>Patch: <strong>2026-11-01</strong></span>
+                        <span>License: <strong>Apache 2.0</strong></span>
                     </div>
                 </div>
 
                 <div class="hero-logo-card">
                     <div class="emblem-wrap">
-                        <img src="profile/gazaos-logo.svg" alt="GazaOS 16.2 Emblem">
+                        <img src="profile/gazaos-logo.svg" alt="GazaOS Emblem">
                     </div>
-                    <img src="profile/gazaos-org-logo.svg" alt="GazaOS Org Wordmark" class="org-wordmark">
-                    <a href="./devices.html" class="latest-release-chip">
-                        <span>●</span> stone v16.2 Official Vanilla Available
-                    </a>
+                    <img src="profile/gazaos-org-logo.svg" alt="GazaOS" class="org-wordmark">
+                    <a href="./devices.html" class="latest-release-chip">Latest Official: stone v16.2 Vanilla</a>
                 </div>
             </div>
         </section>
 
-        <section class="editorial-section" id="pillars">
+        <section class="editorial-section" id="features">
             <div class="container">
-                <div class="section-header center">
-                    <div class="section-kicker">Architecture &amp; Experience</div>
-                    <h2>Built with Lineage simplicity, tuned for modern craft</h2>
-                    <p>Every customization lives cleanly in modular overlays, Settings, and Gaza Lab—keeping builds reproducible, device-agnostic, and lean.</p>
-                </div>
-
-                <!-- Pillar 1: Individuality + Live UI Studio -->
                 <div class="split-block">
                     <div class="split-copy">
-                        <div class="section-kicker">01 &bull; Individuality</div>
-                        <h3>HyperOS Control Center QS &amp; 1-Tap AOSP Look Lite</h3>
+                        <div class="section-kicker">Customization</div>
+                        <h3>HyperOS Control Center &amp; AOSP Look Lite</h3>
                         <p>
-                            Out of the box, SystemUI enables HyperOS-style split Control Center Quick Settings with horizontal swipe pagination, rounded-square sliders and tiles, and a blurred vertical GazaOS volume panel—or switch back cleanly with the one-tap <strong>AOSP Look Lite</strong> toggle in Gaza Lab.
+                            SystemUI ships with HyperOS-style split Control Center Quick Settings, horizontal pagination, rounded-square sliders, and a blurred vertical volume panel. Prefer stock simplicity? Switch back in one tap inside <strong>Gaza Lab</strong>.
                         </p>
                         <ul class="check-list">
-                            <li>Compose homepage styles: GazaOS Hybrid, HyperOS, ColorOS &amp; AOSP</li>
-                            <li>Lightweight HyperOS 4 wallpapers, audio cues, and MiSans Latin typography</li>
-                            <li>GazaOS Lock Styles Studio with HyperBlur art clocks</li>
+                            <li>Compose homepage styles: GazaOS Hybrid, HyperOS, ColorOS, and AOSP</li>
+                            <li>HyperOS 4 wallpapers, audio cues, and MiSans Latin variable font</li>
+                            <li>Lock Styles Studio with HyperBlur clocks and adaptive squircle masks</li>
                         </ul>
                         <div class="chip-bar" id="presetBar">
                             <button class="studio-chip active" type="button" data-preset="hyperos">HyperOS CC</button>
@@ -95,76 +86,83 @@
 
                     <div class="studio-card">
                         <div class="chip-bar" id="viewBar">
-                            <button class="studio-chip active" type="button" data-view="qs">Control Center QS</button>
-                            <button class="studio-chip" type="button" data-view="settings">Settings Bento</button>
+                            <button class="studio-chip active" type="button" data-view="qs">Quick Settings</button>
+                            <button class="studio-chip" type="button" data-view="settings">Settings</button>
                         </div>
                         <div class="phone-mock" id="phoneMock" data-preset="hyperos">
                             <div class="mock-statusbar">
-                                <span>9:41 &bull; 🇵🇸</span>
+                                <span>9:41</span>
                                 <span>5G &bull; 94%</span>
                             </div>
                             <div class="mock-view active" id="view-qs">
                                 <div class="qs-split-grid">
-                                    <div class="qs-tile on" data-toggle>📶 Wi-Fi</div>
-                                    <div class="qs-tile on" data-toggle>🛡️ Datura</div>
-                                    <div class="qs-tile" data-toggle>⚡ 120 Hz</div>
-                                    <div class="qs-tile on" data-toggle>🎵 Dolby</div>
+                                    <div class="qs-tile on" data-toggle>Wi-Fi</div>
+                                    <div class="qs-tile on" data-toggle>Datura</div>
+                                    <div class="qs-tile" data-toggle>120 Hz</div>
+                                    <div class="qs-tile on" data-toggle>Dolby</div>
                                 </div>
                                 <div class="qs-slider-box">
                                     <div class="qs-slider-bar"></div>
-                                    <span>☀️ Display Brightness &bull; 74%</span>
+                                    <span>Display Brightness &bull; 74%</span>
                                 </div>
                                 <div class="qs-slider-box">
                                     <div class="qs-slider-bar" style="width: 60%;"></div>
-                                    <span>🔊 Media Volume (Blurred Vertical)</span>
+                                    <span>Media Volume</span>
                                 </div>
                             </div>
                             <div class="mock-view" id="view-settings">
-                                <div class="settings-card-row"><span><strong>Gaza Lab</strong><br><small style="color:#94a3b8;">UI Preset: HyperOS CC / AOSP Lite</small></span><span>›</span></div>
-                                <div class="settings-card-row"><span><strong>Network &amp; Datura</strong><br><small style="color:#94a3b8;">Per-app firewall active</small></span><span>›</span></div>
-                                <div class="settings-card-row"><span><strong>Sound &amp; DSP</strong><br><small style="color:#94a3b8;">Dolby Atmos + ViPER4Android</small></span><span>›</span></div>
-                                <div class="settings-card-row"><span><strong>About phone</strong><br><small style="color:#94a3b8;">GazaOS 16.2 Official &bull; stone</small></span><span>›</span></div>
+                                <div class="settings-card-row"><span><strong>Gaza Lab</strong><br><small style="color:#94a3b8;">UI Preset: HyperOS CC / AOSP Lite</small></span><span>&rsaquo;</span></div>
+                                <div class="settings-card-row"><span><strong>Firewall</strong><br><small style="color:#94a3b8;">Calyx Datura per-app network control</small></span><span>&rsaquo;</span></div>
+                                <div class="settings-card-row"><span><strong>Audio</strong><br><small style="color:#94a3b8;">Dolby Atmos &amp; ViPER4Android FX</small></span><span>&rsaquo;</span></div>
+                                <div class="settings-card-row"><span><strong>About phone</strong><br><small style="color:#94a3b8;">GazaOS 16.2 &bull; stone</small></span><span>&rsaquo;</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Pillar 2: Security, Longevity & Engineering -->
                 <div class="split-block">
                     <div class="cards-grid">
                         <div class="info-card">
-                            <div class="card-icon">🛡️</div>
-                            <h3>Security &amp; Datura</h3>
-                            <p>Android 16 (2026-11-01 patch), SELinux enforcing rules, and built-in Datura firewall for granular per-app network isolation.</p>
+                            <div class="card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <h3>Security &amp; Firewall</h3>
+                            <p>November 2026 security patch, SELinux enforcing rules, and built-in Datura firewall for per-app network control.</p>
                         </div>
                         <div class="info-card">
-                            <div class="card-icon">⚡</div>
-                            <h3>Lite &amp; Optimized</h3>
-                            <p>Heavy extras stay opt-in (`TARGET_INCLUDE_*=false`) keeping Vanilla images around ~1.3 GB with `speed-profile` dexopt and `kawase_darkmoon` blur.</p>
+                            <div class="card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            </div>
+                            <h3>Lean Footprint</h3>
+                            <p>Heavy add-ons remain opt-in (`TARGET_INCLUDE_* ?= false`), keeping Vanilla images around 1.3 GB with `speed-profile` dexopt.</p>
                         </div>
                         <div class="info-card">
-                            <div class="card-icon">🎵</div>
-                            <h3>Studio Audio Suite</h3>
-                            <p>ViPER4Android FX and Sony Dolby Atmos integrated cleanly alongside lightweight HyperOS 4 notification, alarm, and UI audio.</p>
+                            <div class="card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                            </div>
+                            <h3>Audio Stack</h3>
+                            <p>Includes ViPER4Android FX and Sony Dolby Atmos alongside lightweight HyperOS 4 notification and UI sounds.</p>
                         </div>
                         <div class="info-card">
-                            <div class="card-icon">🔧</div>
-                            <h3>Transparent Builds</h3>
-                            <p>Automated OTA JSON metadata (`GazaOS/OTA`), open `build/soong` &amp; `vendor/lineage` trees, and SHA-256 verified GitHub releases.</p>
+                            <div class="card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            </div>
+                            <h3>Open Source</h3>
+                            <p>Platform trees, OTA manifests (`GazaOS/OTA`), changelogs, and issue tracking are open and verifiable on GitHub.</p>
                         </div>
                     </div>
 
                     <div class="split-copy">
-                        <div class="section-kicker">02 &bull; Longevity &amp; Open Engineering</div>
-                        <h3>Open source from manifest to device trees</h3>
+                        <div class="section-kicker">Build from Source</div>
+                        <h3>Standard manifest workflow</h3>
                         <p>
-                            Every GazaOS core repository (`frameworks_base`, `build_soong`, `build_make`, `vendor_lineage`, `Settings`, `Singularity`, `Launcher3`, `Updater`, `SetupWizard`) is public on <code>github.com/GazaOS</code>. Sync the source tree and build cleanly:
+                            Initialize and sync the GazaOS 16.2 tree cleanly from <code>github.com/GazaOS/android</code>:
                         </p>
                         <div class="code-panel">
-                            <span class="dim"># Initialize GazaOS 16.2 manifest</span><br>
+                            <span class="dim"># Sync platform repositories</span><br>
                             repo init -u https://github.com/GazaOS/android -b 16.2 --git-lfs<br>
                             repo sync -c -j$(nproc --all) --force-sync --no-tags<br><br>
-                            <span class="dim"># Configure &amp; build Official Vanilla</span><br>
+                            <span class="dim"># Build Official Vanilla</span><br>
                             export GAZAOS_BUILD_TYPE=OFFICIAL WITH_GMS=false<br>
                             source build/envsetup.sh &amp;&amp; lunch lineage_stone-bp4a-user &amp;&amp; m bacon
                         </div>
@@ -176,13 +174,13 @@
         <section class="editorial-section">
             <div class="container">
                 <div class="section-header center">
-                    <div class="section-kicker">Solidarity &amp; Transparency</div>
+                    <div class="section-kicker">Solidarity</div>
                     <h2>Stand With Palestine</h2>
-                    <p>GazaOS is built in open-source solidarity with Gaza and the Palestinian people. Verified humanitarian relief organizations highlighted in System Settings:</p>
+                    <p>GazaOS stands in solidarity with the people of Gaza and Palestine. Verified humanitarian relief organizations referenced in System Settings:</p>
                     <div class="cta-row" style="justify-content: center; margin-top: 24px; margin-bottom: 0;">
                         <a href="https://www.palestinercs.org/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Palestinian Red Crescent (PRCS)</a>
                         <a href="https://www.map.org.uk/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Medical Aid for Palestinians (MAP)</a>
-                        <a href="https://www.unrwa.org/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">UNRWA Relief</a>
+                        <a href="https://www.unrwa.org/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">UNRWA</a>
                     </div>
                 </div>
             </div>
@@ -193,43 +191,41 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <img src="profile/gazaos-org-logo.svg" alt="GazaOS Logo" style="height: 44px; width: auto; background: #09110d; padding: 4px 10px 4px 4px; border-radius: 12px; margin-bottom: 12px;">
+                    <img src="profile/gazaos-org-logo.svg" alt="GazaOS" style="height: 44px; width: auto; background: #09110d; padding: 4px 10px 4px 4px; border-radius: 12px; margin-bottom: 12px;">
                     <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 300px;">
-                        Open-source Android 16.2 distribution combining LineageOS, Lunaris-AOSP, crDroid &amp; HyperOS-Hybrid styling.
+                        Open-source Android 16.2 custom ROM based on Lunaris-AOSP, crDroid, and LineageOS.
                     </p>
                 </div>
                 <div class="footer-col">
                     <h4>Project</h4>
                     <ul>
                         <li><a href="./index.html">Overview</a></li>
-                        <li><a href="./devices.html">Supported Devices</a></li>
+                        <li><a href="./devices.html">Downloads</a></li>
                         <li><a href="./team.html">Contributors</a></li>
                         <li><a href="https://github.com/GazaOS/changelogs" target="_blank" rel="noopener noreferrer">Source Changelogs</a></li>
-                        <li><a href="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt" target="_blank" rel="noopener noreferrer">Device Changelog</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Source &amp; OTA</h4>
+                    <h4>Infrastructure</h4>
                     <ul>
                         <li><a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer">GitHub Organization</a></li>
-                        <li><a href="https://github.com/GazaOS/android" target="_blank" rel="noopener noreferrer">Platform Manifest (16.2)</a></li>
-                        <li><a href="https://github.com/GazaOS/OTA" target="_blank" rel="noopener noreferrer">Official OTA Repo</a></li>
-                        <li><a href="https://github.com/Gtajisan/stone/releases" target="_blank" rel="noopener noreferrer">Stone GitHub Releases</a></li>
+                        <li><a href="https://github.com/GazaOS/android" target="_blank" rel="noopener noreferrer">Platform Manifest</a></li>
+                        <li><a href="https://github.com/GazaOS/OTA" target="_blank" rel="noopener noreferrer">Official OTA</a></li>
+                        <li><a href="https://github.com/Gtajisan/stone/releases" target="_blank" rel="noopener noreferrer">Stone Releases</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Community</h4>
+                    <h4>Governance</h4>
                     <ul>
                         <li><a href="https://github.com/GazaOS/official" target="_blank" rel="noopener noreferrer">Official Maintainership</a></li>
                         <li><a href="https://github.com/GazaOS/issue_tracker" target="_blank" rel="noopener noreferrer">Issue Tracker</a></li>
-                        <li><a href="https://t.me/GazaOS" target="_blank" rel="noopener noreferrer">Telegram Community</a></li>
-                        <li><a href="https://www.palestinercs.org/" target="_blank" rel="noopener noreferrer">PRCS Aid</a></li>
+                        <li><a href="https://t.me/GazaOS" target="_blank" rel="noopener noreferrer">Telegram</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>&copy; 2026 GazaOS Organization. Licensed under Apache 2.0.</span>
-                <span>❤️ Free Palestine 🇵🇸</span>
+                <span>&copy; 2026 GazaOS Project. Apache 2.0 License.</span>
+                <span>Free Palestine</span>
             </div>
         </div>
     </footer>
@@ -241,7 +237,7 @@
         htmlEl.setAttribute('data-theme', savedTheme);
         function syncThemeLabel() {
             const isLight = htmlEl.getAttribute('data-theme') === 'light';
-            themeBtn.textContent = isLight ? '🌙 Dark' : '☀️ Light';
+            themeBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
         }
         syncThemeLabel();
         themeBtn.addEventListener('click', () => {

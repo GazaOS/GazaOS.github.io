@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GazaOS Downloads — Official Builds</title>
-    <meta name="description" content="Download official GazaOS 16.2 Vanilla and HyperOS-Hybrid builds, boot images, SHA-256 checksums, and changelogs.">
+    <title>GazaOS Downloads</title>
+    <meta name="description" content="Official GazaOS 16.2 builds, boot images, SHA-256 checksums, and changelogs.">
     <link rel="icon" type="image/svg+xml" href="profile/gazaos-logo.svg">
     <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -14,33 +14,33 @@
     <header class="site-header">
         <div class="container header-inner">
             <a href="./index.html" class="brand-lockup" aria-label="GazaOS Home">
-                <img src="profile/gazaos-org-logo.svg" alt="GazaOS Organization Logo" class="org-logo-img">
+                <img src="profile/gazaos-org-logo.svg" alt="GazaOS" class="org-logo-img">
             </a>
 
             <nav class="nav-menu" aria-label="Primary">
                 <a href="./index.html">Overview</a>
-                <a href="./index.html#pillars">Features</a>
+                <a href="./index.html#features">Features</a>
                 <a href="./devices.html" class="active">Downloads</a>
                 <a href="./team.html">Contributors</a>
-                <a href="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt" target="_blank" rel="noopener noreferrer">Changelog</a>
+                <a href="https://github.com/GazaOS/changelogs" target="_blank" rel="noopener noreferrer">Changelog</a>
                 <a href="https://github.com/GazaOS" target="_blank" rel="noopener noreferrer">GitHub</a>
             </nav>
 
             <div class="header-actions">
-                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme">☀️ Light</button>
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme">Theme</button>
             </div>
         </div>
     </header>
 
     <main class="container">
         <section class="page-banner">
-            <div class="eyebrow-pill">Official OTA Portal &bull; 16.2 (Baklava)</div>
-            <h1>Download GazaOS</h1>
-            <p>Select your device codename below to access signed Official builds, SHA-256 checksums, fastboot recovery boot images, and source changelogs.</p>
+            <div class="eyebrow-pill">GazaOS 16.2 (BP4A)</div>
+            <h1>Downloads</h1>
+            <p>Select a supported device to access Official builds, SHA-256 checksums, boot images, and changelogs.</p>
         </section>
 
         <div class="filter-toolbar">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search by device or codename (e.g. stone, moonstone, sunstone)...">
+            <input type="text" id="searchInput" class="search-input" placeholder="Filter by device or codename (e.g. stone, moonstone)...">
             <div class="chip-bar" style="margin-bottom: 0;">
                 <button class="studio-chip active" type="button" data-filter="all">All</button>
                 <button class="studio-chip" type="button" data-filter="Xiaomi">Xiaomi</button>
@@ -50,7 +50,6 @@
         </div>
 
         <section class="device-grid" id="deviceGrid">
-            <!-- Redmi Note 12 5G (stone / sunstone) -->
             <article class="device-card" data-brand="Redmi Xiaomi" data-name="Redmi Note 12 5G" data-codename="stone sunstone">
                 <div>
                     <div class="device-top">
@@ -63,7 +62,7 @@
                     </div>
                     <div class="device-meta-table">
                         <div><span>Maintainer</span><strong>Masud Parvez</strong></div>
-                        <div><span>Latest Build</span><strong>2026-11-27 (v16.2)</strong></div>
+                        <div><span>Build Date</span><strong>2026-11-27 (v16.2)</strong></div>
                         <div><span>Size</span><strong>1.31 GB</strong></div>
                     </div>
                 </div>
@@ -72,8 +71,8 @@
                         data-ota="devices/stone/stone.json"
                         data-name="Redmi Note 12 5G"
                         data-codename="stone (sunstone)"
-                        data-maintainer="Masud Parvez (@Gtajisan)"
-                        data-version="16.2 OFFICIAL VANILLA (Baklava)"
+                        data-maintainer="Masud Parvez"
+                        data-version="16.2 OFFICIAL VANILLA"
                         data-builddate="2026-11-27"
                         data-size="1.31 GB"
                         data-md5="891a5a48b60b0b25ac370c04d3264e25"
@@ -85,17 +84,14 @@
                         data-changelog="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt">Download</button>
                     <button class="btn btn-secondary btn-spec" type="button"
                         data-name="Redmi Note 12 5G (stone)"
-                        data-specs="Chipset: Qualcomm Snapdragon 4 Gen 1 (SM4375)
-RAM / Storage: 4/6/8 GB · 128/256 GB UFS 2.2
-Display: 6.67&quot; AMOLED · 120Hz · FHD+ (2400x1080)
-Battery: 5000 mAh · 33W Fast Charge
-UI: HyperOS Control Center QS + 1-Tap AOSP Look Lite
-Audio: Dolby Atmos + ViPER4Android FX
-Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
+                        data-specs="Chipset: Snapdragon 4 Gen 1 (SM4375)
+Memory: 4/6/8 GB · 128/256 GB UFS 2.2
+Display: 6.67&quot; AMOLED · 120 Hz · 2400x1080
+Battery: 5000 mAh · 33W
+Device Tree: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
                 </div>
             </article>
 
-            <!-- POCO X5 5G (stone / moonstone) -->
             <article class="device-card" data-brand="Poco Xiaomi" data-name="POCO X5 5G" data-codename="stone moonstone">
                 <div>
                     <div class="device-top">
@@ -108,7 +104,7 @@ Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
                     </div>
                     <div class="device-meta-table">
                         <div><span>Maintainer</span><strong>Masud Parvez</strong></div>
-                        <div><span>Latest Build</span><strong>2026-11-27 (v16.2)</strong></div>
+                        <div><span>Build Date</span><strong>2026-11-27 (v16.2)</strong></div>
                         <div><span>Size</span><strong>1.31 GB</strong></div>
                     </div>
                 </div>
@@ -117,8 +113,8 @@ Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
                         data-ota="devices/stone/stone.json"
                         data-name="POCO X5 5G"
                         data-codename="stone (moonstone)"
-                        data-maintainer="Masud Parvez (@Gtajisan)"
-                        data-version="16.2 OFFICIAL VANILLA (Baklava)"
+                        data-maintainer="Masud Parvez"
+                        data-version="16.2 OFFICIAL VANILLA"
                         data-builddate="2026-11-27"
                         data-size="1.31 GB"
                         data-md5="891a5a48b60b0b25ac370c04d3264e25"
@@ -130,33 +126,30 @@ Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
                         data-changelog="https://github.com/GazaOS/OTA/blob/16.2/changelogs/stone.txt">Download</button>
                     <button class="btn btn-secondary btn-spec" type="button"
                         data-name="POCO X5 5G (moonstone)"
-                        data-specs="Chipset: Qualcomm Snapdragon 695 5G (SM6375)
-RAM / Storage: 6/8 GB · 128/256 GB UFS 2.2
-Display: 6.67&quot; AMOLED · 120Hz · FHD+ (2400x1080)
-Battery: 5000 mAh · 33W Fast Charge
-UI: HyperOS Control Center QS + 1-Tap AOSP Look Lite
-Audio: Dolby Atmos + ViPER4Android FX
-Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
+                        data-specs="Chipset: Snapdragon 695 5G (SM6375)
+Memory: 6/8 GB · 128/256 GB UFS 2.2
+Display: 6.67&quot; AMOLED · 120 Hz · 2400x1080
+Battery: 5000 mAh · 33W
+Device Tree: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
                 </div>
             </article>
 
-            <!-- Maintainer Card -->
             <article class="device-card" data-brand="all" data-name="Maintain a Device" data-codename="open">
                 <div>
                     <div class="device-top">
-                        <span class="badge-official">OPEN PROGRAM</span>
-                        <code>bringup</code>
+                        <span class="badge-official">MAINTAINERSHIP</span>
+                        <code>official</code>
                     </div>
-                    <h2 style="margin-top: 12px; font-size: 1.35rem;">Maintain GazaOS</h2>
+                    <h2 style="margin-top: 12px; font-size: 1.35rem;">Become a Maintainer</h2>
                     <div class="device-thumb">
-                        <img src="profile/gazaos-logo.svg" alt="GazaOS Emblem" style="width: 120px; height: 120px;">
+                        <img src="profile/gazaos-logo.svg" alt="GazaOS Emblem" style="width: 112px; height: 112px;">
                     </div>
                     <p style="color: var(--text-secondary); font-size: 0.92rem;">
-                        Port GazaOS 16.2 to your device cleanly using <code>gazaos.dependencies</code> and automated OTA metadata.
+                        Submit device, vendor, and kernel repositories through the official GazaOS maintainership tracker.
                     </p>
                 </div>
                 <div class="device-actions">
-                    <a href="https://github.com/GazaOS/official" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Guide</a>
+                    <a href="https://github.com/GazaOS/official" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Requirements</a>
                     <a href="https://github.com/GazaOS/official/issues/new/choose" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Apply</a>
                 </div>
             </article>
@@ -166,8 +159,8 @@ Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
     <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-box">
             <div class="modal-head">
-                <h2 id="modalTitle" style="font-size: 1.3rem;">Details</h2>
-                <button class="icon-btn" id="btnClose" type="button">✕ Close</button>
+                <h2 id="modalTitle" style="font-size: 1.25rem;">Details</h2>
+                <button class="icon-btn" id="btnClose" type="button">Close</button>
             </div>
             <div id="modalBody"></div>
         </div>
@@ -176,8 +169,8 @@ Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
     <footer class="site-footer">
         <div class="container">
             <div class="footer-bottom" style="border-top: none; padding-top: 0;">
-                <span>&copy; 2026 GazaOS Organization. Licensed under Apache 2.0.</span>
-                <span>❤️ Free Palestine 🇵🇸</span>
+                <span>&copy; 2026 GazaOS Project. Apache 2.0 License.</span>
+                <span>Free Palestine</span>
             </div>
         </div>
     </footer>
@@ -188,7 +181,7 @@ Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
         const savedTheme = localStorage.getItem('gazaos-theme') || 'dark';
         htmlEl.setAttribute('data-theme', savedTheme);
         function syncThemeLabel() {
-            themeBtn.textContent = htmlEl.getAttribute('data-theme') === 'light' ? '🌙 Dark' : '☀️ Light';
+            themeBtn.textContent = htmlEl.getAttribute('data-theme') === 'light' ? 'Dark Mode' : 'Light Mode';
         }
         syncThemeLabel();
         themeBtn.addEventListener('click', () => {
@@ -233,7 +226,7 @@ Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
             otaCache.get(url).then(data => {
                 const e = data && Array.isArray(data.response) ? data.response[0] : null;
                 if (!e) return;
-                if (e.version) btn.setAttribute('data-version', `${e.version} ${e.buildtype || ''} ${e.edition || ''} (Baklava)`.trim());
+                if (e.version) btn.setAttribute('data-version', `${e.version} ${e.buildtype || ''} ${e.edition || ''}`.trim());
                 if (e.maintainer) btn.setAttribute('data-maintainer', e.maintainer);
                 if (e.download) btn.setAttribute('data-release', e.download);
                 if (e.changelog) btn.setAttribute('data-changelog', e.changelog);
@@ -287,15 +280,15 @@ Trees: Gtajisan/device_xiaomi_stone (16.2)">Specs</button>
                         <div><strong style="color:var(--text);">Maintainer:</strong> ${maintainer}</div>
                         <div><strong style="color:var(--text);">Build:</strong> GazaOS ${version}</div>
                         <div><strong style="color:var(--text);">Date / Size:</strong> ${date} &bull; ${size}</div>
-                        <div style="word-break:break-all;"><strong style="color:var(--text);">File:</strong> <code>${filename}</code></div>
+                        <div style="word-break:break-all;"><strong style="color:var(--text);">Package:</strong> <code>${filename}</code></div>
                         <div style="word-break:break-all; font-size:0.8rem;"><strong style="color:var(--text);">MD5:</strong> <code>${md5}</code></div>
                         <div style="word-break:break-all; font-size:0.8rem;"><strong style="color:var(--text);">SHA-256:</strong> <code>${sha256}</code></div>
                     </div>
                     <div class="modal-links">
-                        <a href="${release}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>🚀 Direct ROM ZIP (GitHub Release)</span><span>⬇️</span></a>
-                        ${sha256file ? `<a href="${sha256file}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>🔐 SHA-256 Checksum File</span><span>⬇️</span></a>` : ''}
-                        ${releasepage ? `<a href="${releasepage}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>📦 Boot / Recovery Images &amp; Notes</span><span>↗</span></a>` : ''}
-                        ${changelog ? `<a href="${changelog}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>📜 Device &amp; Source Changelog</span><span>↗</span></a>` : ''}
+                        <a href="${release}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>ROM Package (.zip)</span><span>&rarr;</span></a>
+                        ${sha256file ? `<a href="${sha256file}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>SHA-256 Checksum (.sha256sum)</span><span>&rarr;</span></a>` : ''}
+                        ${releasepage ? `<a href="${releasepage}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>Boot Images (boot / vendor_boot / dtbo)</span><span>&rarr;</span></a>` : ''}
+                        ${changelog ? `<a href="${changelog}" class="modal-link-row" target="_blank" rel="noopener noreferrer"><span>Device Changelog</span><span>&rarr;</span></a>` : ''}
                     </div>`;
                 openModal(`Download ${name}`, html);
             });
