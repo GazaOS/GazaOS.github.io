@@ -2,20 +2,29 @@
   "response": [
     {
       "maintainer": "Masud Parvez",
-      "currently_maintained": true,
-      "oem": "Xiaomi",
-      "device": "Redmi Note 12 5G / POCO X5 5G",
-      "codename": "stone",
+      "oem": "xiaomi",
+      "device": "stone",
       "filename": "GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip",
       "download": "https://github.com/Gtajisan/stone/releases/download/v16.2-20261127/GazaOSAndroid-16.2-20261127-stone-v16.2-OFFICIAL-VANILLA.zip",
-      "changelog": "https://raw.githubusercontent.com/GazaOS/OTA/refs/heads/16.2/changelogs/stone.txt",
       "timestamp": 1795781529,
       "md5": "891a5a48b60b0b25ac370c04d3264e25",
       "sha256": "4b87c908f6444cc9831739647966b2c52a3cac219f037d23895a7ffbc681922b",
       "size": 1401335266,
       "version": "16.2",
+      "os_patch_level": "2026-11-01",
+      "os_sdk_level": 36,
       "buildtype": "OFFICIAL",
-      "edition": "VANILLA"
+      "forum": "",
+      "gapps": "false",
+      "firmware": "",
+      "modem": "",
+      "bootloader": "",
+      "recovery": "https://github.com/Gtajisan/stone/releases/tag/v16.2-20261127",
+      "paypal": "",
+      "telegram": "https://gazaos.github.io",
+      "dt": "https://github.com/Gtajisan/device_xiaomi_stone/tree/16.2",
+      "common-dt": "",
+      "kernel": "https://github.com/Gtajisan/kernel_xiaomi_stone/tree/16.2"
     }
   ]
 }
